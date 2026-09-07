@@ -1,0 +1,71 @@
+Backend Structure 
+==================
+
+Backend
+
+│
+├── server.js
+│
+├── routes
+│      |
+│      |----register.js
+│      |----login.js
+│      |----prediction.js
+│
+├── controllers
+│      |
+│      |----registerController.js
+│      |----loginController.js
+│      |----predictionController.js
+│
+├── database
+│      |
+│      |----db.js
+│
+├── package.json
+│
+└── .env
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+npm init -y
+npm install express mysql2 cors bcrypt dotenv jsonwebtoken
+
+
+.env file
+PORT=5000
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=yourpassword
+DB_NAME=Heart_Disease_System
+JWT_SECRET=mySecretKey
+
+
+How to Run it
+
+cd Backend
+npm init -y
+npm install express mysql2 cors bcrypt dotenv jsonwebtoken
+
+node server.js
+Server running successfully on Port 5000
+
+http://localhost:5000
+Heart Disease Prediction System API Running Successfully.

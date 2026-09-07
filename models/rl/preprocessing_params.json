@@ -1,0 +1,110 @@
+{
+  "description": "Preprocessing parameters fitted on research/data/heart_disease_trimmed.csv (539 rows, cleaned from research/data/heart_disease_uci.csv). Reproduces research/data/preprocessed_dataset_2026-07-04_07-18-06.csv exactly. Use this artifact to transform new raw patient input into the same 15-dimension representation the RL models were trained on.",
+  "source_reference_data": "research/data/heart_disease_trimmed.csv",
+  "row_count": 539,
+  "scaler": {
+    "method": "robust",
+    "formula": "(raw_value - median) / iqr",
+    "columns": {
+      "age": {
+        "median": 56.0,
+        "iqr": 12.0,
+        "q1": 49.0,
+        "q3": 61.0
+      },
+      "trestbps": {
+        "median": 130.0,
+        "iqr": 22.0,
+        "q1": 120.0,
+        "q3": 142.0
+      },
+      "thalach": {
+        "median": 140.0,
+        "iqr": 38.5,
+        "q1": 120.0,
+        "q3": 158.5
+      },
+      "oldpeak": {
+        "median": 1.0,
+        "iqr": 1.9,
+        "q1": 0.1,
+        "q3": 2.0
+      }
+    }
+  },
+  "categorical_encoding": {
+    "sex": {
+      "Male": 1,
+      "Female": 0
+    },
+    "fbs": {
+      "True": 1,
+      "False": 0
+    },
+    "exang": {
+      "True": 1,
+      "False": 0
+    },
+    "slope": {
+      "downsloping": 0,
+      "flat": 1,
+      "upsloping": 2
+    },
+    "cp_canonical_int": {
+      "typical angina": 0,
+      "atypical angina": 1,
+      "non-anginal": 2,
+      "asymptomatic": 3
+    },
+    "restecg_canonical_int": {
+      "normal": 0,
+      "st-t abnormality": 1,
+      "lv hypertrophy": 2
+    }
+  },
+  "one_hot_expansion": {
+    "cp": {
+      "category_order": [
+        "cp_asymptomatic",
+        "cp_atypical angina",
+        "cp_non-anginal",
+        "cp_typical angina"
+      ],
+      "canonical_int_to_column": {
+        "0": "cp_typical angina",
+        "1": "cp_atypical angina",
+        "2": "cp_non-anginal",
+        "3": "cp_asymptomatic"
+      }
+    },
+    "restecg": {
+      "category_order": [
+        "restecg_lv hypertrophy",
+        "restecg_normal",
+        "restecg_st-t abnormality"
+      ],
+      "canonical_int_to_column": {
+        "0": "restecg_normal",
+        "1": "restecg_st-t abnormality",
+        "2": "restecg_lv hypertrophy"
+      }
+    }
+  },
+  "trained_feature_order_15dim": [
+    "sex",
+    "fbs",
+    "exang",
+    "age",
+    "trestbps",
+    "thalach",
+    "oldpeak",
+    "cp_asymptomatic",
+    "cp_atypical angina",
+    "cp_non-anginal",
+    "cp_typical angina",
+    "restecg_lv hypertrophy",
+    "restecg_normal",
+    "restecg_st-t abnormality",
+    "slope"
+  ]
+}

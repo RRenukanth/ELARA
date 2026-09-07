@@ -1,0 +1,28 @@
+{
+  "model_version": "qlearning-2026-08-13",
+  "algorithm": "Q-Learning",
+  "feature_order": ["thalach", "restecg", "oldpeak", "slope", "age", "sex", "cp", "exang", "trestbps", "fbs"],
+  "preprocessing": {
+    "note": "Trained on the 15-dimension representation produced by backend/services/preprocessingService.js, then discretized into 3 bins per feature (see discretize_state() in Q_Learning.ipynb / backend/services/adapters/qtableAdapter.js). Q-table confirmed by inspecting ql.pkl directly: 230 discretized states, action_size=2, num_bins=3, matching Q_Learning.ipynb.",
+    "num_bins": 3,
+    "trained_state_dimension": 15
+  },
+  "training_metadata": {
+    "fold": "unknown -- ql.pkl was provided without a fold number in its filename or contents",
+    "source_file": "trained_models/ql.pkl (user-provided, placed manually rather than downloaded from a notebook run in this session)",
+    "trained_on": "unknown -- provided as a pre-trained artifact, evaluation_results.csv from the training run was not provided alongside it"
+  },
+  "evaluation_metadata": {
+    "accuracy": null,
+    "precision": null,
+    "recall": null,
+    "f1": null,
+    "roc_auc": null,
+    "note": "Not provided with this artifact. See models/rl/README.md for prior research notes on expected Q-Learning performance (~0.60 accuracy, ~0.67 ROC-AUC, high precision/low recall) -- verify against this specific run before relying on it."
+  },
+  "runtime_compatibility": {
+    "framework": "numpy",
+    "min_python": "3.10",
+    "export_format": "json"
+  }
+}

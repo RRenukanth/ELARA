@@ -1,0 +1,22 @@
+Features used
+===========================================
+
+
+User Inputs
+-----------
+1. Age
+2. Biological Sex
+3. Chest Pain Type
+4. Exercise-Induced Angina
+
+Wearable Device Inputs
+---------------------
+5. Maximum Heart Rate Achieved (thalach)
+6. Resting Electrocardiographic Results (restecg)
+7. ST Depression Induced by Exercise Relative to Rest (oldpeak)
+8. Slope of the Peak Exercise ST Segment (slope)
+
+External Medical Device Inputs
+------------------------------
+9. Resting Blood Pressure (trestbps)
+10. Fasting Blood Sugar (>120 mg/dL) (fbs)

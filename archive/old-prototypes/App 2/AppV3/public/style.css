@@ -1,0 +1,277 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    overflow-x:hidden;
+}
+
+.container{
+    padding:90px 30px;
+    max-width:1200px;
+    margin:auto;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+.card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+
+    box-shadow:
+    0 3px 12px rgba(0,0,0,0.1);
+}
+
+#wifiStatus{
+    font-size:24px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+input,
+select{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-top:10px;
+
+    border:1px solid #ccc;
+
+    border-radius:8px;
+}
+
+.submit-btn,
+.save-btn{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-top:15px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:16px;
+
+    transition:.3s;
+}
+
+.submit-btn:hover,
+.save-btn:hover{
+
+    transform:translateY(-2px);
+}
+
+.submit-btn:active,
+.save-btn:active{
+
+    transform:scale(.95);
+}
+
+.hamburger{
+
+    position:fixed;
+
+    top:20px;
+    left:20px;
+
+    width:55px;
+    height:55px;
+
+    background:white;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    z-index:1001;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:5px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.2);
+
+    transition:.3s;
+}
+
+.hamburger:hover{
+
+    transform:scale(1.05);
+}
+
+.hamburger span{
+
+    width:28px;
+    height:3px;
+
+    background:#111;
+
+    transition:.3s;
+}
+
+.hamburger.active span:nth-child(1){
+
+    transform:
+    translateY(8px)
+    rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2){
+
+    opacity:0;
+}
+
+.hamburger.active span:nth-child(3){
+
+    transform:
+    translateY(-8px)
+    rotate(-45deg);
+}
+
+.sidebar{
+
+    position:fixed;
+
+    left:-320px;
+
+    top:0;
+
+    width:320px;
+
+    height:100vh;
+
+    background:#1e293b;
+
+    color:white;
+
+    z-index:1000;
+
+    transition:.4s ease;
+}
+
+.sidebar.active{
+
+    left:0;
+}
+
+.sidebar-header{
+
+    padding:25px;
+
+    font-size:22px;
+
+    border-bottom:
+    1px solid rgba(255,255,255,.2);
+}
+
+.sidebar-content{
+
+    padding:20px;
+}
+
+.sidebar-content label{
+
+    display:block;
+
+    margin-top:15px;
+}
+
+.overlay{
+
+    position:fixed;
+
+    width:100%;
+    height:100%;
+
+    top:0;
+    left:0;
+
+    background:
+    rgba(0,0,0,.5);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:999;
+}
+
+.overlay.active{
+
+    opacity:1;
+    visibility:visible;
+}
+
+/* Mobile Responsive */
+
+@media(max-width:768px){
+
+    .container{
+        padding:90px 15px;
+    }
+
+    .sidebar{
+        width:260px;
+    }
+
+    h1{
+        font-size:26px;
+    }
+
+    .card{
+        padding:18px;
+    }
+}
+
+/* Small Phones */
+
+@media(max-width:480px){
+
+    .hamburger{
+        width:50px;
+        height:50px;
+    }
+
+    .sidebar{
+        width:240px;
+    }
+
+    h1{
+        font-size:22px;
+    }
+
+    #wifiStatus{
+        font-size:20px;
+    }
+}

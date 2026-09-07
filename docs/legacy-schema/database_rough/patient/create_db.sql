@@ -1,0 +1,2 @@
+CREATE DATABASE Heart_Disease_System;
+USE Heart_Disease_System;

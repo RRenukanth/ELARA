@@ -1,0 +1,8 @@
+Start First Time
+	npm init -y
+	npm install express socket.io cors 
+	node server.js
+
+
+Start = node server.js
+Close  = Ctrl+C

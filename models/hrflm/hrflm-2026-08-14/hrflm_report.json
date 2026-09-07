@@ -1,0 +1,98 @@
+{
+  "hrflm_version": "hrflm-2026-08-14",
+  "explains_model_version": "ppo-fold4-2026-08-13",
+  "reference_dataset": "research/data/heart_disease_trimmed.csv",
+  "reference_row_count": 539,
+  "global_feature_importance": [
+    {
+      "feature": "cp",
+      "label": "Chest pain type",
+      "random_forest_importance": 0.2911762988880558,
+      "linear_model_importance": 0.21610873937606812,
+      "hybrid_importance": 0.2536425191320619
+    },
+    {
+      "feature": "thalach",
+      "label": "Maximum heart rate",
+      "random_forest_importance": 0.18846618617689928,
+      "linear_model_importance": 0.16658106446266174,
+      "hybrid_importance": 0.1775236253197805
+    },
+    {
+      "feature": "exang",
+      "label": "Exercise-related chest discomfort",
+      "random_forest_importance": 0.21119001476981314,
+      "linear_model_importance": 0.1271432638168335,
+      "hybrid_importance": 0.16916663929332332
+    },
+    {
+      "feature": "oldpeak",
+      "label": "ECG stress-test change",
+      "random_forest_importance": 0.0951255980972267,
+      "linear_model_importance": 0.1204066351056099,
+      "hybrid_importance": 0.1077661166014183
+    },
+    {
+      "feature": "trestbps",
+      "label": "Resting blood pressure",
+      "random_forest_importance": 0.0655608761743304,
+      "linear_model_importance": 0.14347504079341888,
+      "hybrid_importance": 0.10451795848387464
+    },
+    {
+      "feature": "sex",
+      "label": "Sex",
+      "random_forest_importance": 0.026450849500383667,
+      "linear_model_importance": 0.09824416786432266,
+      "hybrid_importance": 0.06234750868235316
+    },
+    {
+      "feature": "slope",
+      "label": "ECG ST-segment slope",
+      "random_forest_importance": 0.05898165174457323,
+      "linear_model_importance": 0.043976716697216034,
+      "hybrid_importance": 0.05147918422089463
+    },
+    {
+      "feature": "age",
+      "label": "Age",
+      "random_forest_importance": 0.048823796255875795,
+      "linear_model_importance": 0.029059963300824165,
+      "hybrid_importance": 0.03894187977834998
+    },
+    {
+      "feature": "restecg",
+      "label": "Resting ECG result",
+      "random_forest_importance": 0.00902561461990903,
+      "linear_model_importance": 0.03330903500318527,
+      "hybrid_importance": 0.02116732481154715
+    },
+    {
+      "feature": "fbs",
+      "label": "Fasting blood sugar indicator",
+      "random_forest_importance": 0.005199113772933216,
+      "linear_model_importance": 0.021695390343666077,
+      "hybrid_importance": 0.013447252058299646
+    }
+  ],
+  "surrogate_training_metadata": {
+    "surrogate_target": "real_model_predicted_class",
+    "random_forest": {
+      "n_estimators": 200,
+      "max_depth": 6,
+      "random_state": 42
+    },
+    "linear_model": {
+      "type": "LogisticRegression",
+      "max_iter": 1000,
+      "random_state": 42
+    },
+    "hybrid_combination": "average of RF and LM class-1 probability"
+  },
+  "surrogate_fit_quality": {
+    "hybrid_accuracy_vs_real_model": 0.9369202226345084,
+    "random_forest_accuracy_vs_real_model": 0.9684601113172542,
+    "linear_model_accuracy_vs_real_model": 0.9072356215213359
+  },
+  "generated_at": "2026-08-14T01:04:38.449549+00:00"
+}

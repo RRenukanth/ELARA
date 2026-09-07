@@ -1,0 +1,505 @@
+/*==================================================
+                GOOGLE FONT
+==================================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+
+/*==================================================
+                COLOR VARIABLES
+==================================================*/
+
+:root{
+
+    --primary-blue:#0077B6;
+    --secondary-blue:#00B4D8;
+    --light-blue:#CAF0F8;
+
+    --primary-red:#E63946;
+
+    --success-green:#2ECC71;
+
+    --white:#FFFFFF;
+
+    --light-grey:#F4F7FA;
+
+    --dark-grey:#555555;
+
+    --shadow:
+    0px 10px 25px rgba(0,0,0,0.08);
+
+}
+
+
+/*==================================================
+                BODY
+==================================================*/
+
+body{
+
+    min-height:100vh;
+
+    background:linear-gradient(
+        135deg,
+        #CAF0F8,
+        #FFFFFF
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:30px;
+
+}
+
+
+
+/*==================================================
+                MAIN CONTAINER
+==================================================*/
+
+.container{
+
+    width:100%;
+
+    max-width:500px;
+
+}
+
+
+
+/*==================================================
+                LOGO SECTION
+==================================================*/
+
+.logo-section{
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+}
+
+
+.logo{
+
+    width:130px;
+
+    height:auto;
+
+    margin-bottom:15px;
+
+}
+
+
+.logo-section h1{
+
+    color:var(--primary-blue);
+
+    font-size:30px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+
+.logo-section p{
+
+    color:var(--dark-grey);
+
+    font-size:15px;
+
+}
+
+
+
+/*==================================================
+                LOGIN CARD
+==================================================*/
+
+.login-card{
+
+    background:var(--white);
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:var(--shadow);
+
+}
+
+
+.login-card h2{
+
+    text-align:center;
+
+    color:var(--primary-blue);
+
+    margin-bottom:10px;
+
+}
+
+
+.sub-title{
+
+    text-align:center;
+
+    color:var(--dark-grey);
+
+    margin-bottom:30px;
+
+    font-size:14px;
+
+}
+
+
+
+/*==================================================
+                FORM
+==================================================*/
+
+form{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+label{
+
+    margin-bottom:8px;
+
+    font-weight:500;
+
+    color:#333;
+
+}
+
+
+
+input{
+
+    padding:15px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:15px;
+
+    background:var(--light-grey);
+
+    margin-bottom:20px;
+
+    font-size:15px;
+
+    transition:0.3s;
+
+}
+
+
+input:focus{
+
+    border:2px solid
+    var(--secondary-blue);
+
+}
+
+
+
+/*==================================================
+                REMEMBER ME SECTION
+==================================================*/
+
+.remember-forgot{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+
+.remember{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+
+.remember input{
+
+    margin:0;
+
+}
+
+
+.remember-forgot a{
+
+    color:var(--primary-blue);
+
+    text-decoration:none;
+
+    font-size:14px;
+
+}
+
+
+.remember-forgot a:hover{
+
+    color:var(--primary-red);
+
+}
+
+
+
+/*==================================================
+                BUTTONS
+==================================================*/
+
+button{
+
+    cursor:pointer;
+
+    border:none;
+
+    transition:0.3s;
+
+}
+
+
+/* LOGIN BUTTON */
+
+button[type="submit"]{
+
+    background:linear-gradient(
+            90deg,
+            var(--primary-blue),
+            var(--secondary-blue)
+    );
+
+    color:white;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+}
+
+
+button[type="submit"]:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:var(--shadow);
+
+}
+
+
+
+/* GUEST BUTTON */
+
+
+.guest-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    margin-top:20px;
+
+    background:white;
+
+    border:2px solid
+    var(--primary-blue);
+
+    color:var(--primary-blue);
+
+    font-weight:600;
+
+}
+
+
+.guest-btn:hover{
+
+    background:var(--primary-blue);
+
+    color:white;
+
+}
+
+
+
+/*==================================================
+                DIVIDER
+==================================================*/
+
+.divider{
+
+    margin-top:25px;
+
+    text-align:center;
+
+    position:relative;
+
+}
+
+
+.divider span{
+
+    color:#777;
+
+    background:white;
+
+    padding:0 15px;
+
+}
+
+
+
+/*==================================================
+                REGISTER SECTION
+==================================================*/
+
+.register{
+
+    margin-top:25px;
+
+    text-align:center;
+
+}
+
+
+.register p{
+
+    margin-bottom:10px;
+
+}
+
+
+.register a{
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    color:var(--primary-blue);
+
+}
+
+
+.register a:hover{
+
+    color:var(--primary-red);
+
+}
+
+
+
+/*==================================================
+                FOOTER
+==================================================*/
+
+footer{
+
+    text-align:center;
+
+    margin-top:20px;
+
+    color:#666;
+
+    font-size:14px;
+
+}
+
+
+footer p{
+
+    margin-bottom:5px;
+
+}
+
+
+
+/*==================================================
+                RESPONSIVE DESIGN
+==================================================*/
+
+
+@media(max-width:768px){
+
+    .login-card{
+
+        padding:30px;
+
+    }
+
+}
+
+
+@media(max-width:480px){
+
+    .logo{
+
+        width:100px;
+
+    }
+
+
+    .logo-section h1{
+
+        font-size:24px;
+
+    }
+
+
+    .remember-forgot{
+
+        flex-direction:column;
+
+        gap:15px;
+
+    }
+
+
+    .login-card{
+
+        padding:25px;
+
+    }
+
+
+    button{
+
+        font-size:15px;
+
+    }
+
+}

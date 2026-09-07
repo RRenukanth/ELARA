@@ -1,0 +1,26 @@
+{
+  "model_version": "hrflm-2026-08-14",
+  "explains_model_version": "ppo-fold4-2026-08-13",
+  "algorithm": "HRFLM",
+  "feature_order": [
+    "thalach",
+    "restecg",
+    "oldpeak",
+    "slope",
+    "age",
+    "sex",
+    "cp",
+    "exang",
+    "trestbps",
+    "fbs"
+  ],
+  "audience": "admin-only",
+  "training_metadata": {
+    "reference_dataset": "research/data/heart_disease_trimmed.csv",
+    "trained_on": "2026-08-14"
+  },
+  "runtime_compatibility": {
+    "export_format": "json",
+    "report_file": "hrflm_report.json"
+  }
+}

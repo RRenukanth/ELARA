@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Medical Dashboard</title>
+
+<link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+
+<div id="overlay" class="overlay"></div>
+
+<div id="menuBtn" class="hamburger">
+
+    <span></span>
+    <span></span>
+    <span></span>
+
+</div>
+
+<div id="sidebar" class="sidebar">
+
+    <div class="sidebar-header">
+
+        <h2>Settings</h2>
+
+    </div>
+
+    <div class="sidebar-content">
+
+        <label>User Name</label>
+        <input type="text" placeholder="Admin">
+
+        <label>Email</label>
+        <input type="email" placeholder="admin@gmail.com">
+
+        <label>Theme</label>
+
+        <select>
+            <option>Light</option>
+            <option>Dark</option>
+        </select>
+
+        <button class="save-btn">
+            Save Settings
+        </button>
+
+    </div>
+
+</div>
+
+<div class="container">
+
+    <h1>Medical Dashboard</h1>
+
+    <div class="card">
+
+        <h2>Device Connection</h2>
+
+        <div id="wifiStatus">
+            Checking...
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Enter Data</h2>
+
+        <input
+        type="text"
+        id="patientName"
+        placeholder="Patient Name">
+
+        <input
+        type="number"
+        id="heartRate"
+        placeholder="Heart Rate">
+
+        <button
+        class="submit-btn"
+        onclick="submitData()">
+
+        Submit Data
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="/script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+           DATABASE
+=============================
+1. Patients
+2. Doctors
+3. Administrators
+4. IoT Devices
+5. Sensor Data
+6. ECG Data
+7. Predictions
+8. Prediction History
+9. Explainable AI
+10. Recommendations
+11. Notifications
+12. Appointments
+13. Clinic Schedule
+14. Doctor Verification
+15. Patient Assignments
+16. Reports
+17. Settings
+18. Login History
+19. Device Connection Status
+20. System An0alytics

@@ -1,0 +1,22 @@
+Backend
+
+│
+├── server.js
+│
+├── routes
+│      |
+│      |----registerRoute.js
+│      |----loginRoute.js
+│      |----predictionRoute.js
+│
+├── controllers
+│      |
+│      |----registerController.js
+│      |----loginController.js
+│      |----predictionController.js
+│
+├── database
+│      |
+│      |----db.js
+│
+└── .env

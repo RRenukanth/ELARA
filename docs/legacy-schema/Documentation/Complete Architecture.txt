@@ -1,0 +1,60 @@
+                           USER
+                             |
+
+                        FRONTEND
+                             |
+            --------------------------------
+                1. Patient Dashboard
+                2. Doctor Dashboard
+                3. Admin Dashboard
+            --------------------------------
+                             |
+                           APIs
+                             |
+                          NodeJS
+                             |
+                         ExpressJS
+                             |
+                  ----------------------
+                     Authentication
+                        Prediction
+                           IoT
+                        Reports
+                     Recommendations
+                  ----------------------
+                            |
+                           MySQL
+                            |
+                    ------------------
+                        Patients
+                        Doctors
+                        Reports
+                        History
+                     Recommendations
+                    ------------------
+                            |
+                         AI APIs
+                            |
+                    ------------------
+                           DQN
+                           PPO
+                       Q Learning
+                           LIME
+                          HRFLM
+                    ------------------
+                            |
+                        IoT APIs
+                            |
+                           ESP32
+                            |
+                  MAX30102 ECG Blood Pressure
+                            |
+                        Sensor Data
+                            |
+                        Prediction
+                            |
+                          APIs
+                            |
+                       FRONTEND
+                            |
+                          USER

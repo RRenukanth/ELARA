@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Medical Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">
+        Medical AI
+    </div>
+
+    <div class="menu">
+        <a href="#">Dashboard</a>
+        <a href="#">Devices</a>
+        <a href="#">Reports</a>
+    </div>
+
+    <div class="profile">
+
+        <img
+        src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+        class="user-icon">
+
+        <button onclick="toggleSettings()">
+            User Settings
+        </button>
+
+    </div>
+
+</div>
+
+<div class="main">
+
+    <h1>Device Dashboard</h1>
+
+    <div class="status-card">
+
+        <h2>WiFi Status</h2>
+
+        <span id="wifiStatus">
+            Checking...
+        </span>
+
+    </div>
+
+    <div class="data-card">
+
+        <h2>Enter Data</h2>
+
+        <input type="text"
+        id="patientName"
+        placeholder="Patient Name">
+
+        <input type="number"
+        id="heartRate"
+        placeholder="Heart Rate">
+
+        <button onclick="submitData()">
+            Submit
+        </button>
+
+    </div>
+
+</div>
+
+<div id="settingsPanel">
+
+    <h2>User Settings</h2>
+
+    <label>Username</label>
+    <input type="text" value="Admin">
+
+    <label>Email</label>
+    <input type="email" value="admin@gmail.com">
+
+    <button onclick="toggleSettings()">
+        Close
+    </button>
+
+</div>
+
+<script src="/script.js"></script>
+
+</body>
+</html>

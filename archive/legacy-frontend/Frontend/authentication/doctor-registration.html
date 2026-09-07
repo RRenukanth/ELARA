@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+
+Doctor Registration
+
+</title>
+
+<link rel="stylesheet"
+href="doctor-registration.css">
+
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+
+<link href=
+"https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<!-- Logo -->
+
+
+<div class="logo-section">
+
+<img src="../Images/logo.png"
+class="logo"
+alt="Logo">
+
+
+<h1>
+
+Doctor Registration
+
+</h1>
+
+<p>
+
+Administrator Verification Required
+
+</p>
+
+</div>
+
+
+
+
+<div class="register-card">
+
+
+<form id="doctorForm">
+
+
+<h2>
+
+Personal Information
+
+</h2>
+
+
+
+<div class="row">
+
+<input type="text"
+id="firstName"
+placeholder="First Name"
+required>
+
+
+<input type="text"
+id="lastName"
+placeholder="Last Name"
+required>
+
+</div>
+
+
+
+<input type="email"
+id="email"
+placeholder="Email Address"
+required>
+
+
+
+<input type="password"
+id="password"
+placeholder="Password"
+required>
+
+
+
+<input type="password"
+id="confirmPassword"
+placeholder="Confirm Password"
+required>
+
+
+
+<input type="number"
+id="age"
+placeholder="Age"
+required>
+
+
+
+
+<select id="gender">
+
+<option value="">
+
+Select Gender
+
+</option>
+
+<option>
+
+Male
+
+</option>
+
+<option>
+
+Female
+
+</option>
+
+<option>
+
+Other
+
+</option>
+
+</select>
+
+
+
+<input type="tel"
+id="phone"
+placeholder="Phone Number"
+required>
+
+
+
+
+<h2>
+
+Professional Information
+
+</h2>
+
+
+<input type="text"
+id="hospital"
+placeholder="Hospital Name"
+required>
+
+
+
+<input type="text"
+id="hospitalAddress"
+placeholder="Hospital Address"
+required>
+
+
+
+<input type="text"
+id="specialization"
+placeholder="Specialization"
+required>
+
+
+
+<input type="text"
+id="registrationNumber"
+placeholder=
+"Medical Registration Number"
+required>
+
+
+
+<input type="number"
+id="experience"
+placeholder=
+"Years Of Experience"
+required>
+
+
+
+<h2>
+
+Document Verification
+
+</h2>
+
+
+
+<label>
+
+Upload Medical License
+
+</label>
+
+<input type="file"
+id="license"
+required>
+
+
+
+<label>
+
+Upload NIC / Passport
+
+</label>
+
+<input type="file"
+id="nic"
+required>
+
+
+
+<label>
+
+Upload Profile Picture
+
+</label>
+
+<input type="file"
+id="profilePicture"
+required>
+
+
+
+<div class="checkbox">
+
+<input type="checkbox"
+id="terms"
+required>
+
+
+<label>
+
+I agree that all information
+provided is correct.
+
+</label>
+
+</div>
+
+
+
+
+<button type="submit">
+
+SUBMIT REQUEST
+
+</button>
+
+
+</form>
+
+
+
+
+<div class="pending-message">
+
+<p>
+
+Your account will remain inactive
+until it is approved by the
+administrator.
+
+</p>
+
+</div>
+
+
+
+
+<div class="login-link">
+
+<a href="login.html">
+
+Back To Login
+
+</a>
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+<script src=
+"doctor-registration.js">
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+Frontend
+
+│
+├── Authentication
+│
+│      Login
+│      Registration
+│      Doctor Registration
+│      Forgot Password
+│      OTP Verification
+│
+├── Patient Dashboard
+│
+│      Health Overview
+│      Prediction Result
+│      History
+│      Notifications
+│      Settings
+│
+├── Doctor Dashboard
+│
+│      Patients
+│      Reports
+│      Clinic Schedule
+│      Prediction History
+│      Recommendations
+│
+├── Admin Dashboard
+│
+│      Analytics
+│      Doctor Verification
+│      Reports
+│      Notifications
+│
+└── Components
+       Header
+       Footer
+       Cards
+       Notifications
+       Profile Components

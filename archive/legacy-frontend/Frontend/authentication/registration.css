@@ -1,0 +1,569 @@
+/*==================================================
+                    GLOBAL STYLES
+==================================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+
+/*==================================================
+                    COLORS
+==================================================*/
+
+:root{
+
+    --primary-blue:#0077B6;
+    --secondary-blue:#00B4D8;
+    --light-blue:#CAF0F8;
+
+    --primary-red:#E63946;
+
+    --success-green:#2ECC71;
+
+    --white:#FFFFFF;
+
+    --light-grey:#F4F7FA;
+
+    --dark-grey:#555555;
+
+    --black:#222222;
+
+    --shadow:
+    0px 10px 25px rgba(0,0,0,0.08);
+
+}
+
+
+
+/*==================================================
+                    BODY
+==================================================*/
+
+body{
+
+    min-height:100vh;
+
+    background:
+    linear-gradient(
+        135deg,
+        #CAF0F8,
+        #FFFFFF
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:30px;
+
+}
+
+
+
+/*==================================================
+                SCROLLBAR
+==================================================*/
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+
+/*==================================================
+                MAIN CONTAINER
+==================================================*/
+
+.container{
+
+    width:100%;
+
+    max-width:800px;
+
+}
+
+
+
+/*==================================================
+                LOGO SECTION
+==================================================*/
+
+.logo-section{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+
+.logo{
+
+    width:130px;
+
+    height:auto;
+
+    margin-bottom:15px;
+
+}
+
+
+.logo-section h1{
+
+    color:var(--primary-blue);
+
+    font-size:30px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+
+.logo-section p{
+
+    color:var(--dark-grey);
+
+    font-size:15px;
+
+}
+
+
+
+/*==================================================
+                REGISTER CARD
+==================================================*/
+
+.register-card{
+
+    background:var(--white);
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:var(--shadow);
+
+}
+
+
+.register-card h2{
+
+    text-align:center;
+
+    color:var(--primary-blue);
+
+    margin-bottom:10px;
+
+}
+
+
+.sub-title{
+
+    text-align:center;
+
+    color:var(--dark-grey);
+
+    margin-bottom:30px;
+
+}
+
+
+
+/*==================================================
+                    FORM
+==================================================*/
+
+form{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+/*==================================================
+                    LABELS
+==================================================*/
+
+label{
+
+    font-weight:500;
+
+    color:var(--black);
+
+    margin-bottom:8px;
+
+}
+
+
+
+/*==================================================
+                    INPUTS
+==================================================*/
+
+input,
+select{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    outline:none;
+
+    background:var(--light-grey);
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+
+    font-size:15px;
+
+    transition:0.3s ease;
+
+}
+
+
+input:hover,
+select:hover{
+
+    background:#EDF7FA;
+
+}
+
+
+input:focus,
+select:focus{
+
+    border:2px solid
+    var(--secondary-blue);
+
+    background:white;
+
+}
+
+
+
+
+/*==================================================
+                TWO COLUMN DESIGN
+==================================================*/
+
+.row{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:20px;
+
+}
+
+
+
+/*==================================================
+                    BUTTONS
+==================================================*/
+
+button{
+
+    cursor:pointer;
+
+    border:none;
+
+    outline:none;
+
+    transition:0.3s ease;
+
+}
+
+
+
+button[type="submit"]{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:10px;
+
+    border-radius:15px;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    background:
+    linear-gradient(
+        90deg,
+        var(--primary-blue),
+        var(--secondary-blue)
+    );
+
+}
+
+
+button[type="submit"]:hover{
+
+
+    transform:
+    translateY(-3px);
+
+    box-shadow:var(--shadow);
+
+}
+
+
+
+/*==================================================
+                LOGIN SECTION
+==================================================*/
+
+.login-link{
+
+    margin-top:30px;
+
+    text-align:center;
+
+}
+
+
+.login-link p{
+
+    color:var(--dark-grey);
+
+    margin-bottom:10px;
+
+}
+
+
+.login-link a{
+
+    text-decoration:none;
+
+    color:var(--primary-blue);
+
+    font-weight:600;
+
+    transition:0.3s;
+
+}
+
+
+.login-link a:hover{
+
+    color:var(--primary-red);
+
+}
+
+
+
+
+/*==================================================
+                    FOOTER
+==================================================*/
+
+footer{
+
+    text-align:center;
+
+    margin-top:25px;
+
+    color:#777777;
+
+    font-size:14px;
+
+}
+
+
+footer p{
+
+    margin-bottom:5px;
+
+}
+
+
+
+
+/*==================================================
+                    ANIMATIONS
+==================================================*/
+
+.register-card{
+
+    animation:
+    fadeIn 0.7s ease;
+
+}
+
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(20px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0px);
+
+    }
+
+}
+
+
+
+
+/*==================================================
+                TABLET VIEW
+==================================================*/
+
+@media(max-width:768px)
+{
+
+
+    body{
+
+        padding:20px;
+
+    }
+
+
+    .register-card{
+
+        padding:30px;
+
+    }
+
+
+    .row{
+
+        grid-template-columns:
+        1fr;
+
+    }
+
+
+}
+
+
+
+
+/*==================================================
+                MOBILE VIEW
+==================================================*/
+
+@media(max-width:480px)
+{
+
+
+    body{
+
+        padding:15px;
+
+    }
+
+
+    .container{
+
+        max-width:100%;
+
+    }
+
+
+    .logo{
+
+        width:100px;
+
+    }
+
+
+    .logo-section h1{
+
+        font-size:24px;
+
+    }
+
+
+    .logo-section p{
+
+        font-size:14px;
+
+    }
+
+
+    .register-card{
+
+        padding:25px;
+
+    }
+
+
+    button{
+
+        font-size:15px;
+
+    }
+
+
+}
+
+
+
+
+/*==================================================
+            EXTRA SMALL DEVICES
+==================================================*/
+
+@media(max-width:360px)
+{
+
+
+    .register-card{
+
+        padding:20px;
+
+    }
+
+
+    .logo-section h1{
+
+        font-size:20px;
+
+    }
+
+
+    input,
+    select{
+
+        padding:13px;
+
+    }
+
+
+}

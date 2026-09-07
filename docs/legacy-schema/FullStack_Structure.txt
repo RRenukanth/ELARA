@@ -1,0 +1,213 @@
+Heart-Disease-Prediction-System
+
+│
+├── Authentication
+│      login.html
+│      register.html
+│      forgot-password.html
+│      otp.html
+│
+│      login.css
+│      register.css
+│
+│      login.js
+│      register.js
+│
+------------------------------------------------
+
+├── Patient
+│
+│------ Dashboard
+│            dashboard.html
+│            dashboard.css
+│            dashboard.js
+│
+│------ Monitoring
+│            monitoring.html
+│            monitoring.css
+│            monitoring.js
+│
+│------ Prediction
+│            prediction.html
+│            prediction.css
+│            prediction.js
+│
+│------ Reports
+│            reports.html
+│            reports.css
+│            reports.js
+│
+│------ Appointment
+│            appointment.html
+│            appointment.css
+│            appointment.js
+│
+│------ Notification
+│            notification.html
+│            notification.css
+│            notification.js
+│
+│------ Profile
+│            profile.html
+│            profile.css
+│            profile.js
+│
+------------------------------------------------
+
+├── Doctor
+│
+│------ Dashboard
+│
+│------ Patients
+│
+│------ Monitoring
+│
+│------ Reports
+│
+│------ Recommendation
+│
+│------ Notification
+│
+│------ Profile
+│
+------------------------------------------------
+
+├── Admin
+│
+│------ Dashboard
+│
+│------ User Management
+│
+│------ Analytics
+│
+│------ AI Monitoring
+│
+│------ Database
+│
+│------ Reports
+│
+│------ Notification
+│
+│------ Profile
+│
+------------------------------------------------
+
+├── Components
+│
+│------ Navbar
+│
+│------ Footer
+│
+│------ Sidebar
+│
+│------ Cards
+│
+│------ Graphs
+│
+│------ Buttons
+│
+│------ Alert Cards
+│
+│------ Risk Cards
+│
+------------------------------------------------
+
+├── CSS
+│
+│------ main.css
+│
+│------ colors.css
+│
+│------ animations.css
+│
+│------ responsive.css
+│
+------------------------------------------------
+
+├── Javascript
+│
+│------ charts.js
+│
+│------ notifications.js
+│
+│------ api.js
+│
+│------ utilities.js
+│
+------------------------------------------------
+
+├── Images
+│
+│------ logo.png
+│
+│------ icons
+│
+│------ profile
+│
+------------------------------------------------
+
+├── Graphs
+│
+│------ ECG Graph
+│
+│------ Heart Rate Graph
+│
+│------ Blood Pressure Graph
+│
+│------ SpO2 Graph
+│
+------------------------------------------------
+
+├── APIs
+│
+│------ Prediction API
+│
+│------ Monitoring API
+│
+│------ Notification API
+│
+------------------------------------------------
+
+├── IoT
+│
+│------ ESP32
+│
+│------ MAX30102
+│
+│------ ECG
+│
+│------ BP Sensor
+│
+------------------------------------------------
+
+├── AI Model
+│
+│------ DQN
+│
+│------ LIME
+│
+│------ Training
+│
+│------ Prediction
+│
+------------------------------------------------
+
+├── Database
+│
+│------ MySQL
+│
+│------ Users
+│
+│------ Reports
+│
+│------ Predictions
+│
+------------------------------------------------
+
+└── Deployment
+
+        Render
+
+        or
+
+        VPS

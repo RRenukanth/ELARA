@@ -1,0 +1,643 @@
+/*==================================================
+                    GLOBAL STYLES
+==================================================*/
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+
+}
+
+
+/*==================================================
+                    COLORS
+==================================================*/
+
+:root{
+
+    --primary-blue:#0077B6;
+    --secondary-blue:#00B4D8;
+    --light-blue:#CAF0F8;
+
+    --success-green:#2ECC71;
+
+    --warning:#F39C12;
+
+    --danger:#E63946;
+
+    --white:#FFFFFF;
+
+    --light-grey:#F4F7FA;
+
+    --dark-grey:#555555;
+
+    --shadow:
+    0px 10px 25px
+    rgba(0,0,0,0.08);
+
+}
+
+
+
+/*==================================================
+                    BODY
+==================================================*/
+
+body{
+
+    min-height:100vh;
+
+    background:
+    linear-gradient(
+            135deg,
+            #CAF0F8,
+            #FFFFFF
+    );
+
+    padding:30px;
+
+}
+
+
+.container{
+
+    width:100%;
+
+    max-width:1400px;
+
+    margin:auto;
+
+}
+
+
+
+/*==================================================
+                    HEADER
+==================================================*/
+
+.header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:25px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:40px;
+
+}
+
+
+
+.logo-section h1{
+
+    color:var(--primary-blue);
+
+    margin-bottom:10px;
+
+}
+
+
+.logo-section p{
+
+    color:var(--dark-grey);
+
+}
+
+
+
+/*==================================================
+                HEADER RIGHT
+==================================================*/
+
+.header-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:30px;
+
+}
+
+
+
+/*==================================================
+                NOTIFICATION ICON
+==================================================*/
+
+.notification-icon{
+
+    position:relative;
+
+    font-size:30px;
+
+    cursor:pointer;
+
+}
+
+
+.notification-count{
+
+    position:absolute;
+
+    top:-10px;
+
+    right:-10px;
+
+    background:var(--danger);
+
+    color:white;
+
+    width:22px;
+
+    height:22px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:12px;
+
+}
+
+
+
+/*==================================================
+                PROFILE COMPONENT
+==================================================*/
+
+.profile-section{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+
+.profile-details h3{
+
+    color:var(--primary-blue);
+
+}
+
+
+.profile-details p{
+
+    color:var(--dark-grey);
+
+    font-size:14px;
+
+}
+
+
+.profile-picture{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:4px solid
+    var(--secondary-blue);
+
+}
+
+
+
+/*==================================================
+                WELCOME SECTION
+==================================================*/
+
+.welcome-section{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:25px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:40px;
+
+}
+
+
+.welcome-section h2{
+
+    color:var(--primary-blue);
+
+    margin-bottom:10px;
+
+}
+
+
+.welcome-section p{
+
+    color:var(--dark-grey);
+
+}
+
+
+
+/*==================================================
+                SECTION TITLES
+==================================================*/
+
+section h2{
+
+    color:var(--primary-blue);
+
+    margin-bottom:25px;
+
+}
+
+
+
+/*==================================================
+                OVERVIEW CARDS
+==================================================*/
+
+.overview-cards{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,
+    minmax(250px,1fr));
+
+    gap:25px;
+
+}
+
+
+.overview-card{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+    transition:0.3s;
+
+}
+
+
+.overview-card:hover{
+
+    transform:
+    translateY(-5px);
+
+}
+
+
+.overview-card h3{
+
+    color:var(--dark-grey);
+
+    margin-bottom:15px;
+
+}
+
+
+.overview-card h1{
+
+    color:var(--primary-blue);
+
+    font-size:40px;
+
+}
+
+
+
+/*==================================================
+                MANAGEMENT SECTION
+==================================================*/
+
+.management-section{
+
+    margin-top:50px;
+
+}
+
+
+.management-cards{
+
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,
+    minmax(250px,1fr));
+
+    gap:25px;
+
+}
+
+
+
+.management-card{
+
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:25px;
+
+    box-shadow:var(--shadow);
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+
+
+.management-card:hover{
+
+
+    transform:
+    translateY(-5px);
+
+    background:
+    var(--light-blue);
+
+
+}
+
+
+.management-card h3{
+
+    color:var(--primary-blue);
+
+    margin-bottom:15px;
+
+}
+
+
+.management-card p{
+
+    color:var(--dark-grey);
+
+}
+
+
+
+/*==================================================
+                RECENT ACTIVITIES
+==================================================*/
+
+.activity-section{
+
+
+    margin-top:50px;
+
+}
+
+
+.activity-card{
+
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+
+}
+
+
+.activity-card span{
+
+
+    color:var(--secondary-blue);
+
+    font-weight:600;
+
+}
+
+
+
+/*==================================================
+                    FOOTER
+==================================================*/
+
+footer{
+
+
+    margin-top:50px;
+
+    text-align:center;
+
+    color:var(--dark-grey);
+
+}
+
+
+footer p{
+
+
+    margin-bottom:5px;
+
+}
+
+
+
+/*==================================================
+                    ANIMATIONS
+==================================================*/
+
+.header,
+.welcome-section,
+.overview-card,
+.management-card,
+.activity-card{
+
+
+    animation:
+    fadeIn 0.7s ease;
+
+}
+
+
+
+@keyframes fadeIn{
+
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(20px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0px);
+
+    }
+
+
+}
+
+
+
+/*==================================================
+                TABLET VIEW
+==================================================*/
+
+@media(max-width:768px){
+
+
+    .header{
+
+
+        flex-direction:column;
+
+        gap:30px;
+
+        text-align:center;
+
+    }
+
+
+    .header-right{
+
+
+        flex-direction:column;
+
+    }
+
+
+    .activity-card{
+
+
+        flex-direction:column;
+
+        gap:10px;
+
+        text-align:center;
+
+    }
+
+
+}
+
+
+
+/*==================================================
+                MOBILE VIEW
+==================================================*/
+
+@media(max-width:480px){
+
+
+    body{
+
+        padding:15px;
+
+    }
+
+
+    .header{
+
+        padding:25px;
+
+    }
+
+
+    .welcome-section{
+
+        padding:25px;
+
+    }
+
+
+    .overview-card{
+
+        padding:25px;
+
+    }
+
+
+    .management-card{
+
+        padding:25px;
+
+    }
+
+
+    .profile-picture{
+
+
+        width:55px;
+
+        height:55px;
+
+    }
+
+
+    .notification-icon{
+
+
+        font-size:25px;
+
+    }
+
+
+    .overview-card h1{
+
+
+        font-size:30px;
+
+    }
+
+
+}

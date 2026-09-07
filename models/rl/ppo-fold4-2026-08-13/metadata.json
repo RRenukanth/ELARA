@@ -1,0 +1,29 @@
+{
+  "model_version": "ppo-fold4-2026-08-13",
+  "algorithm": "PPO",
+  "feature_order": ["thalach", "restecg", "oldpeak", "slope", "age", "sex", "cp", "exang", "trestbps", "fbs"],
+  "preprocessing": {
+    "note": "Trained on the 15-dimension representation produced by backend/services/preprocessingService.js (RobustScaler on age/trestbps/thalach/oldpeak + one-hot cp/restecg). Architecture confirmed by inspecting model.pth directly: shared(15->128->128) + actor(128->128->2, softmax) + critic(128->128->1), matching ActorCritic in PPO.ipynb.",
+    "trained_state_dimension": 15
+  },
+  "training_metadata": {
+    "fold": 4,
+    "source_file": "trained_models/ppo.pth (user-provided, placed manually rather than downloaded from a notebook run in this session)",
+    "trained_on": "unknown -- provided as a pre-trained artifact, evaluation_results.csv from the training run was not provided alongside it"
+  },
+  "evaluation_metadata": {
+    "accuracy": null,
+    "precision": null,
+    "recall": null,
+    "f1": null,
+    "roc_auc": null,
+    "note": "Not provided with this artifact. See models/rl/README.md for prior research notes on expected PPO performance (~0.78 accuracy, ~0.85 ROC-AUC, best of the three) -- verify against this specific fold before relying on it."
+  },
+  "runtime_compatibility": {
+    "framework": "pytorch",
+    "min_python": "3.10",
+    "export_format": "onnx",
+    "input_name": "input",
+    "num_classes": 2
+  }
+}

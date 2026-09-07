@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Backend runtime data
+backend/database/*.sqlite
+backend/database/*.sqlite3
+backend/database/*.db
+backend/database/*.db-shm
+backend/database/*.db-wal
+*.log
+
+
+# Frontend build output
+frontend/dist/
+frontend/styles/output.css
+
+# Python / notebooks
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+
+# Model artifacts (large binary files - tracked via releases, not git)
+models/**/*.pth
+models/**/*.pkl
+models/**/*.h5
+models/**/*.onnx
+models/**/*.onnx.data
+trained_models/
+
+# IoT firmware secrets (WiFi credentials, device key)
+iot/firmware/config.h

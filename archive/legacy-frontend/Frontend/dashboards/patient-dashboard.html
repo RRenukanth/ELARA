@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+
+Patient Dashboard
+
+</title>
+
+
+<link rel="stylesheet"
+href="patient-dashboard.css">
+
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+
+<link href=
+"https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+
+</head>
+
+
+<body>
+
+
+
+<div class="container">
+
+
+
+<!--====================================-->
+<!--            HEADER SECTION          -->
+<!--====================================-->
+
+
+<header class="header">
+
+
+<!-- Burger Menu -->
+
+
+<div class="menu-icon">
+
+☰
+
+</div>
+
+
+
+
+<div class="header-right">
+
+
+<div class="iot-status">
+
+
+<h3>
+
+IoT Device
+
+</h3>
+
+
+<p>
+
+Connected
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="profile-section">
+
+
+<div class="profile-details">
+
+<h3>
+
+John Smith
+
+</h3>
+
+
+<p>
+
+Patient
+
+</p>
+
+
+</div>
+
+
+
+<img src="../Images/patient.png"
+
+class="profile-picture"
+
+alt="Profile Picture">
+
+
+</div>
+
+
+
+</div>
+
+
+
+</header>
+
+
+
+
+<!--====================================-->
+<!--            SIDE BAR                -->
+<!--====================================-->
+
+
+<div class="sidebar">
+
+
+<h2>
+
+MENU
+
+</h2>
+
+
+<ul>
+
+
+<li>
+
+Profile
+
+</li>
+
+
+<li>
+
+History
+
+</li>
+
+
+<li>
+
+Prediction History
+
+</li>
+
+
+<li>
+
+Settings
+
+</li>
+
+
+<li>
+
+About System
+
+</li>
+
+
+<li>
+
+Logout
+
+</li>
+
+
+</ul>
+
+
+</div>
+
+
+
+
+<!--====================================-->
+<!--            WELCOME                 -->
+<!--====================================-->
+
+
+<section class="welcome-section">
+
+
+<h1>
+
+Welcome John Smith
+
+</h1>
+
+
+<p>
+
+Heart Disease Prediction System
+
+</p>
+
+
+</section>
+
+
+
+
+<!--====================================-->
+<!--        HEALTH OVERVIEW             -->
+<!--====================================-->
+
+
+<section>
+
+
+<h2>
+
+Health Overview
+
+</h2>
+
+
+
+<div class="overview-cards">
+
+
+<div class="overview-card">
+
+<h3>
+
+Heart Rate
+
+</h3>
+
+
+<h1>
+
+78 BPM
+
+</h1>
+
+
+</div>
+
+
+
+
+<div class="overview-card">
+
+<h3>
+
+Blood Pressure
+
+</h3>
+
+
+<h1>
+
+120 / 80
+
+</h1>
+
+
+</div>
+
+
+
+
+<div class="overview-card">
+
+<h3>
+
+SpO2
+
+</h3>
+
+
+<h1>
+
+98 %
+
+</h1>
+
+
+</div>
+
+
+
+
+<div class="overview-card">
+
+<h3>
+
+Prediction Status
+
+</h3>
+
+
+<h1>
+
+LOW RISK
+
+</h1>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+<!--====================================-->
+<!--            IOT STATUS              -->
+<!--====================================-->
+
+
+<section>
+
+
+<h2>
+
+IoT Device Status
+
+</h2>
+
+
+
+<div class="iot-card">
+
+
+<p>
+
+Device Status :
+Connected
+
+</p>
+
+
+<p>
+
+Battery :
+90 %
+
+</p>
+
+
+<p>
+
+Signal Strength :
+Excellent
+
+</p>
+
+
+<p>
+
+Last Updated :
+5 Seconds Ago
+
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<!--====================================-->
+<!--          MANUAL INPUT              -->
+<!--====================================-->
+
+
+<section>
+
+
+<h2>
+
+Manual Health Information
+
+</h2>
+
+
+
+<div class="form-card">
+
+
+<div class="row">
+
+
+<input type="number"
+placeholder="Age">
+
+
+<select>
+
+<option>
+
+Select Gender
+
+</option>
+
+<option>
+
+Male
+
+</option>
+
+<option>
+
+Female
+
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+<div class="row">
+
+
+<input type="text"
+placeholder="Chest Pain">
+
+
+<input type="text"
+placeholder="Exercise Pain">
+
+
+</div>
+
+
+
+
+<button>
+
+Update Information
+
+</button>
+
+
+<button>
+
+Make Prediction
+
+</button>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+<!--====================================-->
+<!--        PREDICTION RESULT           -->
+<!--====================================-->
+
+
+<section>
+
+
+<h2>
+
+Prediction Result
+
+</h2>
+
+
+
+<div class="prediction-card">
+
+
+<h1>
+
+LOW RISK
+
+</h1>
+
+
+<h3>
+
+Confidence Level :
+95%
+
+</h3>
+
+
+<br>
+
+
+<h3>
+
+What This Means
+
+</h3>
+
+
+<p>
+
+Your current health measurements
+indicate that you have a LOW RISK
+of heart disease at this time.
+
+
+</p>
+
+
+
+<br>
+
+
+<h3>
+
+Health Recommendation
+
+</h3>
+
+
+<p>
+
+Continue regular health monitoring.
+
+Maintain a healthy diet.
+
+Exercise regularly.
+
+Ensure adequate sleep.
+
+
+</p>
+
+
+
+<br>
+
+
+<h3>
+
+Doctor Recommendation
+
+</h3>
+
+
+<p>
+
+No immediate medical consultation
+is required.
+
+Please continue monitoring your
+health condition regularly.
+
+
+</p>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+<!--====================================-->
+<!--        RECENT HISTORY              -->
+<!--====================================-->
+
+
+<section>
+
+
+<h2>
+
+Recent History
+
+</h2>
+
+
+
+<div class="history-card">
+
+
+<h3>
+
+LOW RISK
+
+</h3>
+
+
+<p>
+
+15 July 2026
+
+</p>
+
+
+<p>
+
+Confidence :
+92%
+
+</p>
+
+
+
+</div>
+
+
+
+
+<div class="history-card">
+
+
+<h3>
+
+MEDIUM RISK
+
+</h3>
+
+
+<p>
+
+10 July 2026
+
+</p>
+
+
+<p>
+
+Confidence :
+82%
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="history-card">
+
+
+<h3>
+
+HIGH RISK
+
+</h3>
+
+
+<p>
+
+05 July 2026
+
+</p>
+
+
+<p>
+
+Confidence :
+96%
+
+</p>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+<!--====================================-->
+<!--              FOOTER                -->
+<!--====================================-->
+
+
+<footer>
+
+
+<p>
+
+Heart Disease Prediction System
+
+</p>
+
+
+<p>
+
+Version 1.0
+
+</p>
+
+
+</footer>
+
+
+
+</div>
+
+
+
+
+<script src=
+"patient-dashboard.js">
+
+</script>
+
+
+</body>
+
+</html>
