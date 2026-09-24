@@ -4,7 +4,11 @@
 
 @layer base {
   body {
-    @apply bg-neon-50 text-neon-950 font-sans antialiased;
+    @apply bg-neon-950 text-neon-50 font-sans antialiased;
+    background-image:
+      radial-gradient(1100px 760px at 78% 10%, rgba(47, 123, 255, 0.16), transparent 62%),
+      radial-gradient(900px 640px at 6% 94%, rgba(63, 224, 255, 0.09), transparent 60%);
+    background-attachment: fixed;
   }
 }
 
@@ -12,26 +16,52 @@
   .btn-primary {
     @apply inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-neon-600 to-neon-400
       px-5 py-3 font-semibold text-white shadow-neon-glow transition
-      hover:from-neon-700 hover:to-neon-500 focus:outline-none focus:ring-2 focus:ring-neon-400
+      hover:from-neon-500 hover:to-cyan-400 focus:outline-none focus:ring-2 focus:ring-neon-400
       disabled:cursor-not-allowed disabled:opacity-60;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-xl border-2 border-neon-500 bg-white
-      px-5 py-3 font-semibold text-neon-600 transition hover:bg-neon-500 hover:text-white
+    @apply inline-flex items-center justify-center rounded-xl border-2 border-neon-400 bg-transparent
+      px-5 py-3 font-semibold text-neon-100 transition hover:bg-neon-500 hover:text-white
       focus:outline-none focus:ring-2 focus:ring-neon-400 disabled:cursor-not-allowed disabled:opacity-60;
   }
 
   .input-field {
-    @apply w-full rounded-xl border border-neon-200 bg-neon-50/60 px-4 py-3 text-sm text-neon-950
-      placeholder:text-neon-400 focus:border-neon-500 focus:outline-none focus:ring-2 focus:ring-neon-300;
+    @apply w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-neon-50
+      placeholder:text-neon-400 focus:border-neon-400 focus:outline-none focus:ring-2 focus:ring-neon-500/40;
   }
 
   .card {
-    @apply rounded-2xl bg-white p-6 shadow-card;
+    @apply rounded-2xl border border-white/15 p-6 shadow-card backdrop-blur;
+    background: linear-gradient(160deg, rgba(16, 58, 110, 0.55) 0%, rgba(11, 35, 80, 0.55) 45%, rgba(5, 13, 27, 0.4) 100%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(90, 160, 255, 0.06) inset;
+  }
+
+  /* Tint variants: pair with `.card` (e.g. `card card-tint-blue`) to give
+     sibling boxes a distinct, on-theme wash instead of a flat, identical
+     panel, without introducing off-brand colors. */
+  .card-tint-blue {
+    background: linear-gradient(155deg, rgba(47, 123, 255, 0.16), rgba(47, 123, 255, 0.03));
+    border-color: rgba(47, 123, 255, 0.3);
+  }
+  .card-tint-cyan {
+    background: linear-gradient(155deg, rgba(63, 224, 255, 0.14), rgba(63, 224, 255, 0.02));
+    border-color: rgba(63, 224, 255, 0.28);
+  }
+  .card-tint-crimson {
+    background: linear-gradient(155deg, rgba(255, 59, 92, 0.15), rgba(255, 59, 92, 0.03));
+    border-color: rgba(255, 59, 92, 0.3);
+  }
+  .card-tint-amber {
+    background: linear-gradient(155deg, rgba(255, 180, 63, 0.15), rgba(255, 180, 63, 0.03));
+    border-color: rgba(255, 180, 63, 0.28);
+  }
+  .card-tint-mint {
+    background: linear-gradient(155deg, rgba(51, 217, 166, 0.14), rgba(51, 217, 166, 0.03));
+    border-color: rgba(51, 217, 166, 0.28);
   }
 
   .label {
-    @apply mb-1.5 block text-sm font-medium text-neon-800;
+    @apply mb-1.5 block text-sm font-medium text-neon-100;
   }
 }

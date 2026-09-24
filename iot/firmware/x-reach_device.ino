@@ -1,4 +1,4 @@
-// ELARA IoT Firmware Scaffold (ESP32)
+// X-REACH IoT Firmware Scaffold (ESP32)
 //
 // STATUS: Scaffold / reference implementation, not hardware-validated.
 // No prior ESP32 firmware existed in the legacy project to build on

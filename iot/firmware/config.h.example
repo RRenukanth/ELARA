@@ -2,13 +2,13 @@
 // NEVER commit config.h with real WiFi credentials or a real device key
 // (config.h is covered by the root .gitignore's `iot/firmware/config.h` rule).
 
-#ifndef ELARA_CONFIG_H
-#define ELARA_CONFIG_H
+#ifndef X-REACH_CONFIG_H
+#define X-REACH_CONFIG_H
 
 #define WIFI_SSID       "your-wifi-ssid"
 #define WIFI_PASSWORD   "your-wifi-password"
 
-// Base URL of the ELARA backend (use HTTPS in any real deployment).
+// Base URL of the X-REACH backend (use HTTPS in any real deployment).
 #define API_BASE_URL    "http://192.168.1.100:5000/api"
 
 // Obtained once from POST /api/iot/devices (see ../communication/device-protocol.md).

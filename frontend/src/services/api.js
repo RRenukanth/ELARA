@@ -1,9 +1,9 @@
-// Thin fetch wrapper for the ELARA backend API.
+// Thin fetch wrapper for the X-REACH backend API.
 // Attaches the JWT (if present) and normalizes error handling so callers
 // can just `await` and catch a single Error type with a useful message.
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
-const TOKEN_STORAGE_KEY = "elara_token";
+const TOKEN_STORAGE_KEY = "x-reach_token";
 
 export function getToken() {
   return localStorage.getItem(TOKEN_STORAGE_KEY);

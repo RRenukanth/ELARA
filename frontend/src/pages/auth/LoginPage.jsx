@@ -52,14 +52,14 @@ export default function LoginPage() {
     <AuthLayout title="Welcome Back" subtitle="Login to continue monitoring your heart health.">
       <Alert type="error" message={error} />
 
-      <div className="mb-5 flex rounded-xl bg-neon-50 p-1 text-sm font-medium">
+      <div className="mb-5 flex rounded-xl bg-black/20 p-1 text-sm font-medium">
         {["patient", "doctor", "admin"].map((r) => (
           <button
             key={r}
             type="button"
             onClick={() => setRole(r)}
             className={`flex-1 rounded-lg py-2 capitalize transition ${
-              role === r ? "bg-white text-neon-700 shadow" : "text-neon-500"
+              role === r ? "bg-neon-500 text-white shadow" : "text-neon-300"
             }`}
           >
             {r}
@@ -98,7 +98,7 @@ export default function LoginPage() {
         </div>
 
         <div className="flex items-center justify-end text-sm">
-          <Link to="/forgot-password" className="text-neon-600 hover:text-neon-800">
+          <Link to="/forgot-password" className="text-neon-300 hover:text-neon-100">
             Forgot Password?
           </Link>
         </div>
@@ -108,13 +108,13 @@ export default function LoginPage() {
         </button>
       </form>
 
-      <div className="mt-6 text-center text-sm text-neon-700">
+      <div className="mt-6 text-center text-sm text-neon-300">
         <p>Don&apos;t have an account?</p>
         <div className="mt-2 flex justify-center gap-4">
-          <Link to="/register" className="font-semibold text-neon-600 hover:text-neon-800">
+          <Link to="/register" className="font-semibold text-neon-300 hover:text-neon-100">
             Sign up as Patient
           </Link>
-          <Link to="/register/doctor" className="font-semibold text-neon-600 hover:text-neon-800">
+          <Link to="/register/doctor" className="font-semibold text-neon-300 hover:text-neon-100">
             Register as Doctor
           </Link>
         </div>

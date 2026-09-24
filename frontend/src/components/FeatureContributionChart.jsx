@@ -20,13 +20,13 @@ export default function FeatureContributionChart({ factors }) {
         return (
           <div key={f.factor} className="flex flex-col gap-1">
             <div className="flex items-center justify-between text-xs">
-              <span className="font-medium text-neon-800">{f.label}</span>
+              <span className="font-medium text-neon-100">{f.label}</span>
               <span className={isPositive ? "font-semibold text-red-600" : "font-semibold text-emerald-600"}>
                 {isPositive ? "+" : ""}
                 {f.contribution.toFixed(4)}
               </span>
             </div>
-            <div className="h-2.5 w-full overflow-hidden rounded-full bg-neon-50">
+            <div className="h-2.5 w-full overflow-hidden rounded-full bg-neon-950">
               <div
                 className={`h-full rounded-full ${isPositive ? "bg-red-400" : "bg-emerald-400"}`}
                 style={{ width: `${widthPercent}%` }}

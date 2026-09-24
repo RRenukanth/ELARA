@@ -14,7 +14,7 @@ const STATUS_STYLES = {
   pending: "bg-amber-100 text-amber-700",
   accepted: "bg-emerald-100 text-emerald-700",
   declined: "bg-red-100 text-red-700",
-  cancelled: "bg-neon-100 text-neon-600",
+  cancelled: "bg-white/10 text-neon-300",
 };
 
 export default function FindDoctorPage() {
@@ -70,7 +70,7 @@ export default function FindDoctorPage() {
       <Alert type="success" message={message} />
 
       <section className="mb-8">
-        <h2 className="mb-3 text-lg font-bold text-neon-950">Available Doctors</h2>
+        <h2 className="mb-3 text-lg font-bold text-neon-50">Available Doctors</h2>
         {availableDoctors.length === 0 ? (
           <p className="text-sm text-neon-500">No doctors are currently available to connect with.</p>
         ) : (
@@ -79,10 +79,10 @@ export default function FindDoctorPage() {
               const isPending = pendingDoctorIds.has(doc.doctorId);
               return (
                 <div key={doc.doctorId} className="card">
-                  <h3 className="font-bold text-neon-950">
+                  <h3 className="font-bold text-neon-50">
                     Dr. {doc.firstName} {doc.lastName}
                   </h3>
-                  <p className="text-sm text-neon-600">{doc.specialization}</p>
+                  <p className="text-sm text-neon-300">{doc.specialization}</p>
                   <p className="text-xs text-neon-500">{doc.hospitalName}</p>
                   <button
                     className="btn-primary mt-3 w-full"
@@ -99,7 +99,7 @@ export default function FindDoctorPage() {
       </section>
 
       <section>
-        <h2 className="mb-3 text-lg font-bold text-neon-950">Your Requests</h2>
+        <h2 className="mb-3 text-lg font-bold text-neon-50">Your Requests</h2>
         {requests.length === 0 ? (
           <p className="text-sm text-neon-500">You haven't sent any connection requests yet.</p>
         ) : (
@@ -107,7 +107,7 @@ export default function FindDoctorPage() {
             {requests.map((r) => (
               <div key={r.requestId} className="card flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="font-semibold text-neon-950">
+                  <h3 className="font-semibold text-neon-50">
                     Dr. {r.doctor.firstName} {r.doctor.lastName}
                   </h3>
                   <p className="text-xs text-neon-500">Sent {new Date(r.requestedAt).toLocaleString()}</p>

@@ -25,7 +25,7 @@ export default function MyDoctorsPage() {
 
       {doctors.length === 0 ? (
         <div className="card">
-          <p className="mb-3 text-sm text-neon-600">You aren't connected with any doctors yet.</p>
+          <p className="mb-3 text-sm text-neon-300">You aren't connected with any doctors yet.</p>
           <Link to="/patient/find-doctor" className="btn-primary inline-block">
             Find a Doctor
           </Link>
@@ -34,10 +34,10 @@ export default function MyDoctorsPage() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {doctors.map((doc) => (
             <div key={doc.doctorId} className="card">
-              <h3 className="font-bold text-neon-950">
+              <h3 className="font-bold text-neon-50">
                 Dr. {doc.firstName} {doc.lastName}
               </h3>
-              <p className="text-sm text-neon-600">{doc.specialization}</p>
+              <p className="text-sm text-neon-300">{doc.specialization}</p>
               <p className="text-xs text-neon-500">{doc.hospitalName}</p>
             </div>
           ))}

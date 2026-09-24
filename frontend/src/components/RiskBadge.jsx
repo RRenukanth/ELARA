@@ -5,7 +5,7 @@ const STYLES = {
 };
 
 export default function RiskBadge({ riskLevel }) {
-  const style = STYLES[riskLevel] || "bg-neon-100 text-neon-700 border-neon-300";
+  const style = STYLES[riskLevel] || "bg-white/10 text-neon-200 border-neon-300";
   return (
     <span className={`inline-block rounded-full border px-4 py-1.5 text-sm font-semibold ${style}`}>
       {riskLevel}

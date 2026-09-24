@@ -71,10 +71,10 @@ export default function ConnectionRequestsPage() {
           {requests.map((r) => (
             <div key={r.requestId} className="card flex flex-wrap items-center justify-between gap-4">
               <div>
-                <h3 className="font-bold text-neon-950">
+                <h3 className="font-bold text-neon-50">
                   {r.patient.firstName} {r.patient.lastName}
                 </h3>
-                <p className="text-sm text-neon-600">
+                <p className="text-sm text-neon-300">
                   {r.patient.age} yrs - {r.patient.sex}
                 </p>
                 <p className="text-xs text-neon-500">Requested {new Date(r.requestedAt).toLocaleString()}</p>

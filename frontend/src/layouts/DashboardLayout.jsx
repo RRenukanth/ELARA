@@ -26,12 +26,12 @@ export default function DashboardLayout({ title, subtitle, navItems, children })
   const { session, logout } = useAuth();
 
   return (
-    <div className="min-h-screen bg-neon-50 lg:flex">
+    <div className="min-h-screen bg-neon-950 lg:flex">
       <aside className="w-full bg-gradient-to-b from-neon-950 to-neon-800 p-4 lg:sticky lg:top-0 lg:h-screen lg:w-64 lg:flex-shrink-0">
         <div className="mb-6 flex items-center gap-2 px-2">
           <Logo size="sm" />
           <div>
-            <p className="text-lg font-bold text-white leading-tight">ELARA</p>
+            <p className="text-lg font-bold text-white leading-tight">X-REACH</p>
             <p className="text-xs text-neon-300">Heart Health Companion</p>
           </div>
         </div>
@@ -51,21 +51,21 @@ export default function DashboardLayout({ title, subtitle, navItems, children })
       </aside>
 
       <div className="flex-1">
-        <header className="flex flex-wrap items-center justify-between gap-3 border-b border-neon-100 bg-white px-6 py-4">
+        <header className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-neon-900/60 px-6 py-4 backdrop-blur">
           <div>
-            <h1 className="text-xl font-bold text-neon-950">{title}</h1>
-            {subtitle && <p className="text-sm text-neon-600">{subtitle}</p>}
+            <h1 className="text-xl font-bold text-neon-50">{title}</h1>
+            {subtitle && <p className="text-sm text-neon-300">{subtitle}</p>}
           </div>
           <div className="text-right">
-            <p className="text-sm font-semibold text-neon-800">{session?.username}</p>
-            <p className="text-xs capitalize text-neon-500">{session?.role}</p>
+            <p className="text-sm font-semibold text-neon-50">{session?.username}</p>
+            <p className="text-xs capitalize text-neon-400">{session?.role}</p>
           </div>
         </header>
 
         <main className="p-6">{children}</main>
 
         <footer className="px-6 py-4 text-center text-xs text-neon-400">
-          ELARA - Explainable Reinforcement Learning and IoT for Heart Disease Prediction
+          X-REACH - Explainable Reinforcement Learning and IoT for Heart Disease Prediction
         </footer>
       </div>
     </div>

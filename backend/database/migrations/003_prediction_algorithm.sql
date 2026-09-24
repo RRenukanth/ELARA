@@ -1,4 +1,4 @@
--- ELARA Backend - Add algorithm selection to predictions (SQLite)
+-- X-REACH Backend - Add algorithm selection to predictions (SQLite)
 --
 -- Records which RL algorithm (ppo / dqn / q-learning / demo) produced a
 -- given prediction, now that patients can choose which trained model to

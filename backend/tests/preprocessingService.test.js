@@ -8,7 +8,7 @@ const os = require("os");
 // other test files, which only need migrations -- see tests/helpers/testServer.js).
 // Set up an isolated temp DB here directly rather than depending on the
 // developer having run `node database/seedTrainingReferenceData.js` against
-// the real backend/database/elara.db first.
+// the real backend/database/x-reach.db first.
 
 const TRIMMED_CSV_PATH = path.resolve(__dirname, "..", "..", "research", "data", "heart_disease_trimmed.csv");
 const ORIGINAL_PREPROCESSED_CSV_PATH = path.resolve(
@@ -20,7 +20,7 @@ let toTrainedRepresentation;
 let TRAINED_FEATURE_ORDER_15DIM;
 
 before(() => {
-  tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "elara-preprocessing-test-"));
+  tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "x-reach-preprocessing-test-"));
   // DB_PATH is resolved by database/db.js relative to backend/ (__dirname
   // here is backend/tests, so ".." is backend/) -- see tests/helpers/testServer.js
   // for the same convention.

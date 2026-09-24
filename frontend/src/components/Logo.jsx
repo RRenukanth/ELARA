@@ -7,7 +7,7 @@ const SIZE_CLASSES = {
 };
 
 /**
- * Shared app logo/icon. Use everywhere the ELARA "brand mark" would appear
+ * Shared app logo/icon. Use everywhere the X-REACH "brand mark" would appear
  * in a commercial product: auth screens, dashboard navigation, browser tab
  * (favicon, wired separately in index.html), etc. Keeping this as a single
  * component means the icon can be swapped/updated in one place.
@@ -16,7 +16,7 @@ export default function Logo({ size = "md", className = "" }) {
   return (
     <img
       src={logo}
-      alt="ELARA logo"
+      alt="X-REACH logo"
       className={`${SIZE_CLASSES[size] || SIZE_CLASSES.md} rounded-xl object-contain drop-shadow-neon-glow ${className}`}
     />
   );

@@ -3,6 +3,7 @@ const predictionModel = require("../models/predictionModel");
 const doctorModel = require("../models/doctorModel");
 const modelService = require("../services/modelService");
 const limeService = require("../services/limeService");
+const groqExplanationService = require("../services/groqExplanationService");
 const { extractCanonicalFeatures } = require("../utils/featureContract");
 const { HttpError } = require("../middleware/errorHandler");
 
@@ -21,17 +22,35 @@ async function createPrediction(req, res) {
   const healthRecord = healthDataModel.create(patientId, features, req.body.source === "iot" ? "iot" : "manual");
 
   // Algorithm selection is intentionally not exposed to the client: the
-  // app only uses PPO for predictions (see product decision to disable
-  // model selection). Any client-supplied "algorithm" field is ignored so
-  // this cannot be bypassed via a direct API call. DQN and Q-Learning
-  // artifacts remain on disk under models/rl/ and are still fully usable
-  // via modelService.predict(features, { algorithm }) if re-enabled later.
-  const result = await modelService.predict(features, { algorithm: "ppo" });
+  // app only uses the app-wide default algorithm for predictions (see
+  // modelService.js's DEFAULT_ALGORITHM for why PPO is currently the
+  // default). Any client-supplied "algorithm" field is ignored so this
+  // cannot be bypassed via a direct API call. The other trained artifacts
+  // remain on disk under models/rl/ and are still fully usable via
+  // modelService.predict(features, { algorithm }) if re-enabled later.
+  const result = await modelService.predict(features, { algorithm: modelService.defaultAlgorithm });
 
   // LIME must query the EXACT SAME model/algorithm that produced this
   // prediction (see explainability.md) -- bind scoreFeatures to it.
   const scoreFn = (sampleFeatures) => modelService.scoreFeatures(sampleFeatures, result.algorithm);
   const explanation = await limeService.explain(features, scoreFn, result.demoMode);
+
+  // LLM-generated prose explanation, on top of the rule-based one above.
+  // Best-effort: never blocks or fails prediction creation (see
+  // groqExplanationService.js) -- if Groq is unreachable or unconfigured,
+  // these simply resolve to null and the rule-based explanation is still
+  // shown to the user.
+  const llmContext = {
+    riskLevel: result.riskLevel,
+    confidenceScore: result.confidenceScore,
+    factors: explanation.factors,
+    features,
+    demoMode: result.demoMode,
+  };
+  const [patientLlmExplanation, doctorLlmExplanation] = await Promise.all([
+    groqExplanationService.generatePatientExplanation(llmContext),
+    groqExplanationService.generateDoctorExplanation(llmContext),
+  ]);
 
   const prediction = predictionModel.create({
     patientId,
@@ -44,6 +63,8 @@ async function createPrediction(req, res) {
     contributingFactors: explanation.factors,
     patientExplanation: limeService.toPatientExplanation(explanation),
     doctorExplanation: limeService.toDoctorExplanation(explanation),
+    patientLlmExplanation,
+    doctorLlmExplanation,
   });
 
   return res.status(201).json({

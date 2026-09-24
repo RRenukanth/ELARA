@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true, limit: "1mb" }));
 app.use(cors(corsOrigins.length > 0 ? { origin: corsOrigins } : {}));
 
 app.get("/", (req, res) => {
-  res.send("ELARA Heart Disease Prediction System API is running.");
+  res.send("X-REACH Heart Disease Prediction System API is running.");
 });
 
 app.use("/api/auth", authRoutes);
@@ -40,7 +40,7 @@ app.use(errorHandler);
 // ephemeral port so multiple test files can run without port conflicts.
 if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(`ELARA backend listening on port ${PORT}`);
+    console.log(`X-REACH backend listening on port ${PORT}`);
   });
 }
 

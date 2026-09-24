@@ -60,11 +60,11 @@ export default function AdminDashboard() {
           {doctors.map((doc) => (
             <div key={doc.doctorId} className="card flex flex-wrap items-center justify-between gap-4">
               <div>
-                <h3 className="font-bold text-neon-950">
+                <h3 className="font-bold text-neon-50">
                   {doc.firstName} {doc.lastName}
                 </h3>
-                <p className="text-sm text-neon-600">{doc.email}</p>
-                <p className="text-sm text-neon-600">
+                <p className="text-sm text-neon-300">{doc.email}</p>
+                <p className="text-sm text-neon-300">
                   {doc.hospitalName} - {doc.specialization}
                 </p>
               </div>

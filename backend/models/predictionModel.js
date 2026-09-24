@@ -4,8 +4,9 @@ function create(prediction) {
   const result = run(
     `INSERT INTO predictions (
       patient_id, health_id, model_version, algorithm, demo_mode, risk_level,
-      confidence_score, contributing_factors, patient_explanation, doctor_explanation
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      confidence_score, contributing_factors, patient_explanation, doctor_explanation,
+      patient_llm_explanation, doctor_llm_explanation
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       prediction.patientId,
       prediction.healthId,
@@ -17,6 +18,8 @@ function create(prediction) {
       JSON.stringify(prediction.contributingFactors || []),
       prediction.patientExplanation || null,
       prediction.doctorExplanation || null,
+      prediction.patientLlmExplanation || null,
+      prediction.doctorLlmExplanation || null,
     ]
   );
   return findById(Number(result.lastInsertRowid));
@@ -70,6 +73,7 @@ function toPatientView(row) {
     confidenceScore: row.confidence_score,
     contributingFactors: factors,
     explanation: row.patient_explanation,
+    llmExplanation: row.patient_llm_explanation,
     demoMode: Boolean(row.demo_mode),
     modelVersion: row.model_version,
     algorithm: row.algorithm,
@@ -81,6 +85,7 @@ function toDoctorView(row) {
   return {
     ...toPatientView(row),
     doctorExplanation: row.doctor_explanation,
+    doctorLlmExplanation: row.doctor_llm_explanation,
     features: {
       thalach: row.thalach,
       restecg: row.restecg,

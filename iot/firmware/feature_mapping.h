@@ -1,10 +1,10 @@
-// Sensor-reading -> canonical-feature mapping used by elara_device.ino.
+// Sensor-reading -> canonical-feature mapping used by x-reach_device.ino.
 // See ../communication/feature-mapping.md for the full rationale and the
 // features intentionally NOT sent by this scaffold (restecg, oldpeak, slope,
 // which require ECG waveform analysis not implemented here).
 
-#ifndef ELARA_FEATURE_MAPPING_H
-#define ELARA_FEATURE_MAPPING_H
+#ifndef X-REACH_FEATURE_MAPPING_H
+#define X-REACH_FEATURE_MAPPING_H
 
 // Only features this scaffold can actually populate from its wired sensors.
 // Everything else must come from the patient's manual input in the app --

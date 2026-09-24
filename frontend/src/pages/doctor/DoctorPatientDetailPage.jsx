@@ -47,7 +47,7 @@ export default function DoctorPatientDetailPage() {
                 <div className="flex items-center gap-2">
                   <RiskBadge riskLevel={p.riskLevel} />
                   {p.algorithm && (
-                    <span className="rounded-full bg-neon-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-neon-700">
+                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-neon-200">
                       {p.algorithm}
                     </span>
                   )}
@@ -60,17 +60,25 @@ export default function DoctorPatientDetailPage() {
                 <p className="text-xs text-neon-500">{new Date(p.createdAt).toLocaleString()}</p>
               </div>
 
-              <p className="mt-3 text-sm text-neon-700">{p.doctorExplanation}</p>
+              <p className="mt-3 text-sm text-neon-200">{p.doctorExplanation}</p>
+              {p.doctorLlmExplanation && (
+                <div className="mt-3 rounded-lg bg-neon-950 p-3">
+                  <p className="mb-1 text-xs font-bold uppercase tracking-wide text-neon-500">
+                    Clinical summary
+                  </p>
+                  <p className="text-sm text-neon-200">{p.doctorLlmExplanation}</p>
+                </div>
+              )}
 
               <div className="mt-4">
-                <h3 className="mb-2 text-sm font-bold text-neon-950">LIME Feature Contributions</h3>
+                <h3 className="mb-2 text-sm font-bold text-neon-50">LIME Feature Contributions</h3>
                 <FeatureContributionChart factors={p.contributingFactors} />
               </div>
 
-              <h3 className="mt-4 mb-2 text-sm font-bold text-neon-950">Submitted Features</h3>
-              <div className="grid grid-cols-2 gap-2 text-xs text-neon-600 sm:grid-cols-5">
+              <h3 className="mt-4 mb-2 text-sm font-bold text-neon-50">Submitted Features</h3>
+              <div className="grid grid-cols-2 gap-2 text-xs text-neon-300 sm:grid-cols-5">
                 {Object.entries(p.features).map(([key, value]) => (
-                  <div key={key} className="rounded-lg bg-neon-50 px-2 py-1">
+                  <div key={key} className="rounded-lg bg-neon-950 px-2 py-1">
                     <span className="font-semibold">{key}</span>: {value}
                   </div>
                 ))}

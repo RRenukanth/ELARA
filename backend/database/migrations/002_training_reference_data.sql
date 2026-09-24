@@ -1,4 +1,4 @@
--- ELARA Backend - Training Reference Data (SQLite)
+-- X-REACH Backend - Training Reference Data (SQLite)
 --
 -- Stores the cleaned reference dataset (research/data/heart_disease_trimmed.csv,
 -- 539 rows derived from the raw UCI heart_disease_uci.csv, containing ONLY the

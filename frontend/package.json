@@ -1,7 +1,7 @@
 {
-  "name": "elara-frontend",
+  "name": "x-reach-frontend",
   "version": "1.0.0",
-  "description": "ELARA - Explainable Reinforcement Learning and IoT for Optimal Heart Disease Prediction: React + Tailwind frontend.",
+  "description": "X-REACH - Explainable Reinforcement Learning and IoT for Optimal Heart Disease Prediction: React + Tailwind frontend.",
   "private": true,
   "type": "module",
   "scripts": {

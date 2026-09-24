@@ -1,0 +1,43 @@
+{
+  "model_version": "ppo-fold4-2026-09-17",
+  "algorithm": "PPO",
+  "feature_order": [
+    "thalach",
+    "restecg",
+    "oldpeak",
+    "slope",
+    "age",
+    "sex",
+    "cp",
+    "exang",
+    "trestbps",
+    "fbs"
+  ],
+  "preprocessing": {
+    "note": "Trained on the 15-dimension representation produced by backend/services/preprocessingService.js. Architecture: shared(15->128->128) + actor(128->128->2, softmax) + critic(128->128->1), with dropout added.",
+    "trained_state_dimension": 15
+  },
+  "training_metadata": {
+    "fold": 4,
+    "num_folds": 5,
+    "episodes": 500,
+    "entropy_coefficient": 0.05,
+    "dropout": 0.15,
+    "trained_on": "2026-09-17"
+  },
+  "evaluation_metadata": {
+    "accuracy": 0.7870370370370371,
+    "precision": 0.8412698412698413,
+    "recall": 0.803030303030303,
+    "f1": 0.8217054263565892,
+    "roc_auc": 0.8737373737373737
+  },
+  "runtime_compatibility": {
+    "framework": "javascript",
+    "export_format": "layers-json",
+    "weights_file": "weights.json",
+    "input_dim": 15,
+    "num_classes": 2,
+    "output_activation": "softmax"
+  }
+}

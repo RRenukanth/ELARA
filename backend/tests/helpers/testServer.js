@@ -12,7 +12,7 @@ const os = require("os");
 const path = require("path");
 
 function setTestEnv() {
-  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "elara-test-"));
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "x-reach-test-"));
   const dbFile = path.join(tmpDir, "test.db");
 
   process.env.DB_PATH = path.relative(path.join(__dirname, "..", ".."), dbFile);

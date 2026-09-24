@@ -27,7 +27,7 @@ export default function App() {
   // First-load state: the auth session is still being restored from
   // localStorage (see hooks/useAuth.jsx). Shown once per app start.
   if (isLoading) {
-    return <LoadingScreen label="Starting ELARA..." />;
+    return <LoadingScreen label="Starting X-REACH..." />;
   }
 
   return (

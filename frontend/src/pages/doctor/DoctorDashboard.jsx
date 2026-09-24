@@ -39,10 +39,10 @@ export default function DoctorDashboard() {
               to={`/doctor/patients/${p.patientId}`}
               className="card block transition hover:shadow-neon-glow"
             >
-              <h3 className="font-bold text-neon-950">
+              <h3 className="font-bold text-neon-50">
                 {p.firstName} {p.lastName}
               </h3>
-              <p className="text-sm text-neon-600">
+              <p className="text-sm text-neon-300">
                 {p.age} yrs - {p.sex}
               </p>
               <p className="mt-1 text-xs text-neon-400">Status: {p.status}</p>

@@ -1,7 +1,7 @@
 {
-  "name": "elara-backend",
+  "name": "x-reach-backend",
   "version": "1.0.0",
-  "description": "ELARA - Explainable Reinforcement Learning and IoT for Optimal Heart Disease Prediction: Node.js/Express backend with SQLite persistence.",
+  "description": "X-REACH - Explainable Reinforcement Learning and IoT for Optimal Heart Disease Prediction: Node.js/Express backend with SQLite persistence.",
   "main": "server.js",
   "type": "commonjs",
   "engines": {

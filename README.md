@@ -1,6 +1,6 @@
-# ELARA - Explainable Reinforcement Learning and IoT for Optimal Heart Disease Prediction
+# X-REACH - Explainable Reinforcement Learning and IoT for Optimal Heart Disease Prediction
 
-ELARA is a research-oriented, explainable heart disease risk-prediction system.
+X-REACH is a research-oriented, explainable heart disease risk-prediction system.
 It combines a reinforcement-learning research pipeline, local/global
 explainability (LIME + HRFLM), IoT-based health data acquisition, and a
 full-stack web application for patients, doctors, and administrators.
@@ -13,7 +13,7 @@ healthcare professional.
 ## Project structure
 
 ```text
-ELARA/
+X-REACH/
 ├── research/            Python/Jupyter research pipeline (Google Colab)
 │   ├── data/             Raw + balanced datasets
 │   ├── preprocessing/    Dataset balancing, RL problem formulation, cross-validation folds
@@ -47,7 +47,7 @@ ELARA/
 │   └── src/services/api.js    Fetch wrapper for the backend API
 │
 ├── iot/                  ESP32 firmware scaffold + device communication contract
-│   ├── firmware/            elara_device.ino (unvalidated scaffold), config.h.example
+│   ├── firmware/            x-reach_device.ino (unvalidated scaffold), config.h.example
 │   └── communication/       device-protocol.md, feature-mapping.md
 │
 ├── docs/                 Legacy schema/documentation and design references (historical)

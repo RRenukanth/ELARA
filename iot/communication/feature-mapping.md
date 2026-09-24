@@ -21,7 +21,7 @@ mapping; the firmware scaffold in
 ## Implication for the firmware scaffold
 
 Because `restecg`, `oldpeak`, and `slope` require ECG waveform analysis that
-is not implemented in `../firmware/elara_device.ino` (an intentional
+is not implemented in `../firmware/x-reach_device.ino` (an intentional
 placeholder, not a real analysis pipeline), the scaffold only demonstrates
 sending `thalach` (heart rate) and, if a BP module is attached, `trestbps`.
 It sends `null`/omits the other features rather than fabricating values --

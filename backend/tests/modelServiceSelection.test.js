@@ -16,6 +16,7 @@ const path = require("path");
 
 const MODELS_RL_DIR = path.resolve(__dirname, "..", "..", "models", "rl");
 const FIXTURE_PPO_DIR = path.join(MODELS_RL_DIR, "test-fixture-ppo-selection");
+const FIXTURE_DQN_DIR = path.join(MODELS_RL_DIR, "test-fixture-dqn-selection");
 const FIXTURE_QLEARNING_DIR = path.join(MODELS_RL_DIR, "test-fixture-qlearning-selection");
 
 const FIXTURE_ONNX_PATH = path.join(__dirname, "fixtures", "tiny_model.onnx");
@@ -39,7 +40,7 @@ let movedAsideDirs = [];
 function moveRealModelsAside() {
   if (!fs.existsSync(MODELS_RL_DIR)) return;
   const entries = fs.readdirSync(MODELS_RL_DIR, { withFileTypes: true });
-  const asideRoot = fs.mkdtempSync(path.join(os.tmpdir(), "elara-models-aside-"));
+  const asideRoot = fs.mkdtempSync(path.join(os.tmpdir(), "x-reach-models-aside-"));
   for (const entry of entries) {
     if (!entry.isDirectory()) continue;
     if (entry.name.startsWith("test-fixture-")) continue;
@@ -68,7 +69,7 @@ before(() => {
   // modelService.js requires preprocessingService.js, which reads scaler
   // params from the database -- point at an isolated, migrated+seeded DB
   // so scoreFeatures() doesn't touch the developer's real database.
-  tmpDbDir = fs.mkdtempSync(path.join(os.tmpdir(), "elara-modelservice-test-"));
+  tmpDbDir = fs.mkdtempSync(path.join(os.tmpdir(), "x-reach-modelservice-test-"));
   process.env.DB_PATH = path.relative(
     path.join(__dirname, ".."),
     path.join(tmpDbDir, "test.db")
@@ -109,7 +110,24 @@ before(() => {
     })
   );
 
-  // Fixture 2: a Q-Learning-labeled Q-table JSON model.
+  // Fixture 2: a DQN-labeled ONNX model (reusing the shared tiny ONNX
+  // fixture). DQN is the app's default algorithm (see modelService.js
+  // DEFAULT_ALGORITHM) -- this fixture must be present for the "preferred
+  // default" tests below to actually exercise that preference, rather than
+  // passing by coincidence of fixture directory name ordering.
+  fs.mkdirSync(FIXTURE_DQN_DIR, { recursive: true });
+  fs.copyFileSync(FIXTURE_ONNX_PATH, path.join(FIXTURE_DQN_DIR, "model.onnx"));
+  fs.writeFileSync(
+    path.join(FIXTURE_DQN_DIR, "metadata.json"),
+    JSON.stringify({
+      model_version: "test-fixture-dqn-selection-v0",
+      algorithm: "DQN",
+      evaluation_metadata: { accuracy: 0.5 },
+      runtime_compatibility: { export_format: "onnx", input_name: "input", num_classes: 2, output_activation: "none" },
+    })
+  );
+
+  // Fixture 3: a Q-Learning-labeled Q-table JSON model.
   fs.mkdirSync(FIXTURE_QLEARNING_DIR, { recursive: true });
   fs.writeFileSync(
     path.join(FIXTURE_QLEARNING_DIR, "model.json"),
@@ -132,6 +150,7 @@ before(() => {
 
 after(() => {
   fs.rmSync(FIXTURE_PPO_DIR, { recursive: true, force: true });
+  fs.rmSync(FIXTURE_DQN_DIR, { recursive: true, force: true });
   fs.rmSync(FIXTURE_QLEARNING_DIR, { recursive: true, force: true });
   restoreRealModels();
   try {
@@ -154,7 +173,11 @@ test("listAvailableModels reports every discovered algorithm with correct defaul
 
   const models = modelService.listAvailableModels();
   const keys = models.map((m) => m.key).sort();
-  assert.deepEqual(keys, ["ppo", "q-learning"]);
+  assert.deepEqual(keys, ["dqn", "ppo", "q-learning"]);
+
+  const dqn = models.find((m) => m.key === "dqn");
+  assert.equal(dqn.isDefault, false);
+  assert.equal(dqn.modelVersion, "test-fixture-dqn-selection-v0");
 
   const ppo = models.find((m) => m.key === "ppo");
   assert.equal(ppo.isDefault, true); // PPO preferred when available
@@ -190,7 +213,7 @@ test("predict() rejects an unknown algorithm rather than silently falling back",
 
 test("scoreFeatures() returns a probability-like number for each available algorithm", async () => {
   const modelService = freshModelService();
-  for (const key of ["ppo", "q-learning"]) {
+  for (const key of ["ppo", "dqn", "q-learning"]) {
     const score = await modelService.scoreFeatures(SAMPLE_FEATURES, key);
     assert.ok(score >= 0 && score <= 1, `score for ${key} should be in [0,1], got ${score}`);
   }

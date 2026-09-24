@@ -15,7 +15,7 @@ const { DatabaseSync } = require("node:sqlite");
 
 const DB_PATH = process.env.DB_PATH
   ? path.resolve(__dirname, "..", process.env.DB_PATH)
-  : path.resolve(__dirname, "elara.db");
+  : path.resolve(__dirname, "x-reach.db");
 
 const db = new DatabaseSync(DB_PATH);
 db.exec("PRAGMA foreign_keys = ON;");

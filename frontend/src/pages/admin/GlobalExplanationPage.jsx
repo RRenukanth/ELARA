@@ -40,25 +40,25 @@ export default function GlobalExplanationPage() {
         <p className="text-sm text-neon-500">Loading global explanation...</p>
       ) : !explanation?.available ? (
         <div className="card">
-          <p className="text-sm text-neon-600">
+          <p className="text-sm text-neon-300">
             {explanation?.message || "No HRFLM global explanation is currently available."}
           </p>
         </div>
       ) : (
         <div className="flex flex-col gap-6">
-          <div className="card">
+          <div className="card card-tint-blue">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
-                <h2 className="text-lg font-bold text-neon-950">
+                <h2 className="text-lg font-bold text-neon-50">
                   Explains model version: {explanation.explainsModelVersion}
                 </h2>
-                <p className="text-sm text-neon-600">
+                <p className="text-sm text-neon-300">
                   HRFLM version {explanation.hrflmVersion} - trained on {explanation.referenceRowCount} reference
                   patients - generated {new Date(explanation.generatedAt).toLocaleString()}
                 </p>
               </div>
               {explanation.surrogateFitQuality && (
-                <span className="rounded-full bg-neon-100 px-3 py-1 text-xs font-semibold text-neon-700">
+                <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-neon-200">
                   Surrogate matches model {Math.round(
                     explanation.surrogateFitQuality.hybrid_accuracy_vs_real_model * 100
                   )}% of the time
@@ -69,7 +69,7 @@ export default function GlobalExplanationPage() {
 
           {explanation.explainabilityMetrics && (
             <section>
-              <h2 className="mb-3 text-lg font-bold text-neon-950">Explainability Quality Metrics</h2>
+              <h2 className="mb-3 text-lg font-bold text-neon-50">Explainability Quality Metrics</h2>
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
                 <StatCard label="Fidelity" value={formatMetric(explanation.explainabilityMetrics.fidelity)} />
                 <StatCard label="Accuracy Gain" value={formatMetric(explanation.explainabilityMetrics.accuracyGain)} />
@@ -99,9 +99,9 @@ export default function GlobalExplanationPage() {
             </section>
           )}
 
-          <section className="card">
-            <h2 className="mb-3 text-lg font-bold text-neon-950">Global Feature Importance</h2>
-            <p className="mb-4 text-sm text-neon-600">
+          <section className="card card-tint-cyan">
+            <h2 className="mb-3 text-lg font-bold text-neon-50">Global Feature Importance</h2>
+            <p className="mb-4 text-sm text-neon-300">
               How much each feature drives the model's decisions across the entire patient population
               (unlike a per-patient explanation, this does not indicate direction for any single case).
             </p>

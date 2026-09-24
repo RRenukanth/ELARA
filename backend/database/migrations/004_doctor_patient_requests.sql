@@ -1,4 +1,4 @@
--- ELARA Backend - Doctor <-> Patient Connection Requests (SQLite)
+-- X-REACH Backend - Doctor <-> Patient Connection Requests (SQLite)
 --
 -- Implements a request/accept workflow (patient sends a connection request,
 -- doctor accepts or declines) as the PRIMARY way a doctor_patient_assignments

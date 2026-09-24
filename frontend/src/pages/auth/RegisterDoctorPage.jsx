@@ -153,7 +153,7 @@ export default function RegisterDoctorPage() {
           />
         </div>
 
-        <p className="rounded-xl border border-neon-200 bg-neon-50 px-4 py-3 text-xs text-neon-700">
+        <p className="rounded-xl border border-white/10 bg-neon-950 px-4 py-3 text-xs text-neon-200">
           Your account will remain inactive until it is approved by an administrator.
         </p>
 
@@ -162,8 +162,8 @@ export default function RegisterDoctorPage() {
         </button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-neon-700">
-        <Link to="/login" className="font-semibold text-neon-600 hover:text-neon-800">
+      <p className="mt-6 text-center text-sm text-neon-200">
+        <Link to="/login" className="font-semibold text-neon-300 hover:text-neon-100">
           Back to Login
         </Link>
       </p>

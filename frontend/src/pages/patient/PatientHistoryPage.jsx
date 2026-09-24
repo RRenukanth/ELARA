@@ -43,7 +43,7 @@ export default function PatientHistoryPage() {
                 >
                   <div>
                     <p className="text-xs text-neon-500">{new Date(p.createdAt).toLocaleString()}</p>
-                    <p className="mt-1 text-sm text-neon-700">
+                    <p className="mt-1 text-sm text-neon-200">
                       Confidence: {Math.round(p.confidenceScore * 100)}%
                       {p.algorithm && <span className="ml-2 text-xs uppercase tracking-wide text-neon-500">({p.algorithm})</span>}
                       {p.demoMode && <span className="ml-2 text-xs text-amber-600">(demo mode)</span>}
@@ -53,9 +53,15 @@ export default function PatientHistoryPage() {
                 </button>
 
                 {isExpanded && (
-                  <div className="mt-4 border-t border-neon-100 pt-4">
-                    <p className="mb-3 text-sm text-neon-700">{p.explanation}</p>
-                    <h3 className="mb-2 text-sm font-bold text-neon-950">What Influenced This Result</h3>
+                  <div className="mt-4 border-t border-white/10 pt-4">
+                    <p className="mb-3 text-sm text-neon-200">{p.explanation}</p>
+                    {p.llmExplanation && (
+                      <div className="mb-3 rounded-lg bg-neon-950 p-3">
+                        <p className="mb-1 text-xs font-bold uppercase tracking-wide text-neon-500">In more detail</p>
+                        <p className="text-sm text-neon-200">{p.llmExplanation}</p>
+                      </div>
+                    )}
+                    <h3 className="mb-2 text-sm font-bold text-neon-50">What Influenced This Result</h3>
                     <FeatureContributionChart factors={p.contributingFactors} />
                   </div>
                 )}

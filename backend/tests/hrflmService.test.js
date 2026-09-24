@@ -23,7 +23,7 @@ let movedAsideDirs = [];
 function moveRealArtifactsAside() {
   if (!fs.existsSync(MODELS_HRFLM_DIR)) return;
   const entries = fs.readdirSync(MODELS_HRFLM_DIR, { withFileTypes: true });
-  const asideRoot = fs.mkdtempSync(path.join(os.tmpdir(), "elara-hrflm-aside-"));
+  const asideRoot = fs.mkdtempSync(path.join(os.tmpdir(), "x-reach-hrflm-aside-"));
   for (const entry of entries) {
     if (!entry.isDirectory()) continue;
     if (entry.name.startsWith("test-fixture-")) continue;

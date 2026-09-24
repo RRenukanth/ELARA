@@ -53,32 +53,52 @@ async function runInference(session, featureVector, inputName) {
 /**
  * Interpret a raw model output as a binary risk prediction.
  *
- * IMPORTANT: PPO and DQN do NOT have the same output shape in these
- * notebooks.
- *   - PPO: ACTION_SIZE = 2 -- a genuine binary classifier output
- *     (index 0 = "No Heart Disease", index 1 = "Heart Disease").
+ * IMPORTANT: PPO and DQN do NOT have the same output shape OR the same
+ * output activation in these notebooks.
+ *   - PPO: ACTION_SIZE = 2 -- a genuine binary classifier output, and its
+ *     actor head ends in its own softmax layer (see PPO.ipynb's
+ *     ActorCritic: `actor(128->128->2, softmax)`). The exported ONNX
+ *     output is therefore ALREADY a normalized probability distribution
+ *     (index 0 = "No Heart Disease", index 1 = "Heart Disease") -- it
+ *     must be used as-is. Applying softmax to it AGAIN would compress
+ *     every near-certain prediction towards the same two values
+ *     (softmax([1,0]) and softmax([0,1]) regardless of how close to 0/1
+ *     the original probabilities were), destroying the model's actual
+ *     confidence signal.
  *   - DQN: ACTION_SIZE = NUM_FEATURES * 3 (increase/decrease/hold per
- *     feature -- a feature-modification action space, not a classifier).
- *     The notebook's own evaluation cell repurposes this by taking only
- *     the FIRST TWO Q-values as a binary classifier
- *     (`torch.argmax(q_values[:, :2], dim=1)` in EHR_DQN_PyTorch.ipynb).
- *     To reproduce that exactly, this function only uses the first
- *     `numClasses` output values -- pass 2 for both algorithms here, but
- *     it must come from metadata.json (runtime_compatibility.num_classes)
- *     rather than being assumed, since a differently-configured DQN could
- *     have a different total action count.
+ *     feature -- a feature-modification action space, not a classifier),
+ *     and its final layer is a plain Linear layer (raw Q-values, not
+ *     probabilities). The notebook's own evaluation cell repurposes this
+ *     by taking only the FIRST TWO Q-values as a binary classifier
+ *     (`torch.argmax(q_values[:, :2], dim=1)` in EHR_DQN_PyTorch.ipynb)
+ *     and these DO need softmax to become comparable probabilities.
+ *
+ * Which case applies is read from metadata.json's
+ * runtime_compatibility.output_activation ("softmax" | "none") rather than
+ * assumed from the algorithm name, since it describes a property of the
+ * specific exported ONNX graph.
  *
  * @param {Float32Array|number[]} output
  * @param {number} numClasses - how many leading output values represent
  *   the binary classification (see note above; typically 2).
+ * @param {"softmax"|"none"} [outputActivation] - "softmax" if the ONNX
+ *   graph's own final layer already normalizes `output` into
+ *   probabilities (apply it as-is); "none" (default) if `output` is raw
+ *   logits/Q-values that this function must still normalize itself.
  * @returns {{ predictedAction: number, confidenceScore: number }}
  */
-function interpretOutput(output, numClasses = 2) {
+function interpretOutput(output, numClasses = 2, outputActivation = "none") {
   const values = Array.from(output).slice(0, numClasses);
-  const maxVal = Math.max(...values);
-  const expValues = values.map((v) => Math.exp(v - maxVal));
-  const sumExp = expValues.reduce((a, b) => a + b, 0);
-  const probabilities = expValues.map((v) => v / sumExp);
+
+  let probabilities;
+  if (outputActivation === "softmax") {
+    probabilities = values;
+  } else {
+    const maxVal = Math.max(...values);
+    const expValues = values.map((v) => Math.exp(v - maxVal));
+    const sumExp = expValues.reduce((a, b) => a + b, 0);
+    probabilities = expValues.map((v) => v / sumExp);
+  }
 
   const predictedAction = probabilities.indexOf(Math.max(...probabilities));
   const confidenceScore = probabilities[1] ?? probabilities[predictedAction];

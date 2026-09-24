@@ -142,9 +142,9 @@ export default function RegisterPatientPage() {
         </button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-neon-700">
+      <p className="mt-6 text-center text-sm text-neon-200">
         Already have an account?{" "}
-        <Link to="/login" className="font-semibold text-neon-600 hover:text-neon-800">
+        <Link to="/login" className="font-semibold text-neon-300 hover:text-neon-100">
           Login
         </Link>
       </p>

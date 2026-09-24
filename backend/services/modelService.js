@@ -28,6 +28,7 @@ const { CANONICAL_FEATURE_ORDER } = require("../utils/featureContract");
 const { toTrainedRepresentation } = require("./preprocessingService");
 const onnxAdapter = require("./adapters/onnxAdapter");
 const qtableAdapter = require("./adapters/qtableAdapter");
+const layersAdapter = require("./adapters/layersAdapter");
 
 const MODELS_RL_DIR = path.resolve(__dirname, "..", "..", "models", "rl");
 
@@ -73,6 +74,7 @@ function discoverModels() {
     const exportFormat = metadata.runtime_compatibility?.export_format;
     const exportFileName = exportFormat === "onnx" ? "model.onnx"
       : exportFormat === "json" ? "model.json"
+      : exportFormat === "layers-json" ? (metadata.runtime_compatibility.weights_file || "weights.json")
       : null;
     if (!exportFileName) continue;
 
@@ -100,6 +102,17 @@ for (const entry of discovered) {
 }
 
 const DEMO_MODE = modelsByAlgorithm.size === 0;
+// PPO is the default: both ppo-fold4-2026-09-17 and dqn-fold1-2026-09-17
+// were retrained on 2026-09-17 with clinically-safe data augmentation,
+// entropy regularization (PPO) / dropout+weight-decay (DQN), and
+// verified-correct output-activation handling (see
+// research/reinforcement_learning/X-REACH_DQN_Training.ipynb / _PPO_
+// Training.ipynb). On their own held-out real test folds, PPO decisively
+// outperforms DQN: accuracy 0.787 vs 0.593, recall 0.803 vs 0.409, F1
+// 0.822 vs 0.551, ROC-AUC 0.874 vs 0.794 (precision is roughly tied). DQN's
+// low recall means it misses over half of real disease cases on held-out
+// data -- a serious problem for a screening tool. Revisit this default
+// only if a fold with genuinely better verified metrics is supplied.
 const DEFAULT_ALGORITHM = modelsByAlgorithm.has("ppo")
   ? "ppo"
   : modelsByAlgorithm.keys().next().value;
@@ -128,6 +141,9 @@ async function ensureRuntimeLoaded(algorithmKey) {
     } else if (entry.exportFormat === "json") {
       const model = qtableAdapter.loadQTable(entry.exportPath);
       runtime = { type: "qtable", model };
+    } else if (entry.exportFormat === "layers-json") {
+      const model = layersAdapter.loadWeights(entry.exportPath);
+      runtime = { type: "layers", model };
     } else {
       throw new Error(`Unsupported export_format: ${entry.exportFormat}`);
     }
@@ -199,7 +215,18 @@ async function scoreFeatures(features, algorithmKey) {
   if (runtime.type === "onnx") {
     const output = await onnxAdapter.runInference(runtime.session, featureVector, runtime.inputName);
     const numClasses = entry.metadata.runtime_compatibility.num_classes || 2;
-    const { confidenceScore } = onnxAdapter.interpretOutput(output, numClasses);
+    const outputActivation = entry.metadata.runtime_compatibility.output_activation || "none";
+    const { confidenceScore } = onnxAdapter.interpretOutput(output, numClasses, outputActivation);
+    return confidenceScore;
+  }
+
+  if (runtime.type === "layers") {
+    const output = layersAdapter.runInference(runtime.model, featureVector);
+    const numClasses = entry.metadata.runtime_compatibility.num_classes || 2;
+    const outputActivation = entry.metadata.runtime_compatibility.output_activation || "none";
+    // Reuses onnxAdapter's interpretation logic -- it's pure array math,
+    // not ONNX-specific, so the same softmax-or-not handling applies here.
+    const { confidenceScore } = onnxAdapter.interpretOutput(output, numClasses, outputActivation);
     return confidenceScore;
   }
 

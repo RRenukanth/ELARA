@@ -1,4 +1,4 @@
--- ELARA Backend - Initial Schema (SQLite)
+-- X-REACH Backend - Initial Schema (SQLite)
 -- Converted from legacy MySQL schema (docs/legacy-schema/database_rough/patient/*.sql)
 -- and expanded to cover patients, doctors, admins, health data,
 -- predictions, and IoT devices.

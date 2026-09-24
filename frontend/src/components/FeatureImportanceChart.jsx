@@ -19,10 +19,10 @@ export default function FeatureImportanceChart({ importances }) {
         return (
           <div key={f.feature} className="flex flex-col gap-1">
             <div className="flex items-center justify-between text-xs">
-              <span className="font-medium text-neon-800">{f.label}</span>
-              <span className="font-semibold text-neon-700">{f.hybridImportance.toFixed(4)}</span>
+              <span className="font-medium text-neon-100">{f.label}</span>
+              <span className="font-semibold text-neon-200">{f.hybridImportance.toFixed(4)}</span>
             </div>
-            <div className="h-2.5 w-full overflow-hidden rounded-full bg-neon-50">
+            <div className="h-2.5 w-full overflow-hidden rounded-full bg-neon-950">
               <div className="h-full rounded-full bg-neon-500" style={{ width: `${widthPercent}%` }} />
             </div>
           </div>
