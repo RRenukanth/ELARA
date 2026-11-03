@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState, useCallback } from "react";
 import DashboardLayout from "../../layouts/DashboardLayout.jsx";
 import Alert from "../../components/Alert.jsx";
 import RiskBadge from "../../components/RiskBadge.jsx";
 import MedicalDisclaimer from "../../components/MedicalDisclaimer.jsx";
 import PredictionForm from "../../components/PredictionForm.jsx";
 import FeatureContributionChart from "../../components/FeatureContributionChart.jsx";
+import WearableDeviceCard from "../../components/WearableDeviceCard.jsx";
+import EcgDeviceCard from "../../components/EcgDeviceCard.jsx";
 import { api } from "../../services/api.js";
 
 const NAV_ITEMS = [
@@ -20,6 +22,18 @@ export default function PatientDashboard() {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [predictionResult, setPredictionResult] = useState(null);
+  const [wearableThalach, setWearableThalach] = useState(null);
+  const [ecgData, setEcgData] = useState(null);
+  const [thalachReady, setThalachReady] = useState(false);
+  const [wearableConnected, setWearableConnected] = useState(false);
+
+  const handleThalachUpdate = useCallback((newThalach) => {
+    setWearableThalach(newThalach);
+  }, []);
+
+  const handleEcgUpdate = useCallback((newEcg) => {
+    setEcgData(newEcg);
+  }, []);
 
   useEffect(() => {
     api.getOwnPatientProfile().then((r) => setProfile(r.patient)).catch(() => {});
@@ -51,15 +65,27 @@ export default function PatientDashboard() {
     >
       <Alert type="error" message={error} />
 
+      {/* Top Wearable Device Interface: Connect Button & Average Heart Rate */}
+      <WearableDeviceCard onThalachUpdate={handleThalachUpdate} thalachReady={thalachReady} onThalachReadyChange={setThalachReady} onConnectionChange={setWearableConnected} />
+
+      {/* AD8232 ECG Monitor Interface: Connected Under the Heart Rate Readings */}
+      <EcgDeviceCard onEcgUpdate={handleEcgUpdate} />
+
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <section className="card card-tint-blue lg:col-span-2">
           <h2 className="mb-4 text-lg font-bold text-neon-50">Enter Your Health Information</h2>
           <p className="mb-4 text-sm text-neon-300">
-            Provide the measurements below to receive a risk assessment. Values marked with a device
-            can also be filled automatically once an IoT device is connected.
+            Provide the measurements below to receive a risk assessment. Maximum Heart Rate (Thalach)
+            syncs from your PPG heart rate sensor, and Resting ECG, ST Depression, and ST-Segment Slope
+            sync automatically from your AD8232 ECG monitor.
           </p>
 
-          <PredictionForm onSubmit={handlePredict} isSubmitting={isSubmitting} />
+          <PredictionForm
+            onSubmit={handlePredict}
+            isSubmitting={isSubmitting}
+            externalThalach={wearableThalach}
+            externalEcg={ecgData} thalachReady={thalachReady} onThalachReadyChange={setThalachReady} wearableConnected={wearableConnected}
+          />
         </section>
 
         <section className="card card-tint-cyan flex flex-col gap-4">

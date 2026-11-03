@@ -6,13 +6,13 @@
 // them into fuller prose, phrased differently for each audience --
 // everyday language for patients, clinical terminology for doctors.
 //
-// This call is always best-effort. A missing API key, a network failure,
-// or a Groq outage must never block prediction creation (the rule-based
-// explanation from limeService already covers that path) -- every function
-// here catches its own errors and resolves to null rather than throwing.
+// If Groq is unconfigured or temporarily unavailable, a deterministic
+// clinical rule-based prose generator produces the exact natural-language
+// sentences so patients and doctors always receive an intuitive explanation.
 
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
-const DEFAULT_MODEL = "openai/gpt-oss-120b";
+const DEFAULT_MODEL = "llama-3.3-70b-versatile";
+const FALLBACK_MODELS = ["llama-3.3-70b-versatile", "llama-3.1-8b-instant", "mixtral-8x7b-32768"];
 const REQUEST_TIMEOUT_MS = 8000;
 
 const { FEATURE_LABELS } = require("../utils/featureContract");
@@ -27,13 +27,13 @@ const { FEATURE_LABELS } = require("../utils/featureContract");
  * }} context
  */
 function buildFactorSummary(context) {
-  return context.factors
+  return (context.factors || [])
     .map((f) => {
       const label = f.label || FEATURE_LABELS[f.factor] || f.factor;
       const direction = f.contribution > 0 ? "increased" : "decreased";
       const value = context.features?.[f.factor];
       const valuePart = value !== undefined ? ` (patient value: ${value})` : "";
-      return `- ${label}${valuePart}: ${direction} the predicted risk (LIME weight ${f.contribution.toFixed(3)})`;
+      return `- ${label}${valuePart}: ${direction} the predicted risk (LIME weight ${f.contribution > 0 ? "+" : ""}${f.contribution.toFixed(3)})`;
     })
     .join("\n");
 }
@@ -49,52 +49,55 @@ function buildUserPrompt(context) {
 }
 
 async function callGroq(systemPrompt, userPrompt) {
-  const apiKey = process.env.GROQ_API_KEY;
+  const apiKey = (process.env.GROQ_API_KEY || "").trim();
   if (!apiKey) {
     return null;
   }
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  const primaryModel = (process.env.GROQ_MODEL || DEFAULT_MODEL).trim();
+  const modelsToTry = [primaryModel, ...FALLBACK_MODELS.filter((m) => m !== primaryModel)];
 
-  try {
-    const response = await fetch(GROQ_API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: process.env.GROQ_MODEL || DEFAULT_MODEL,
-        temperature: 0.3,
-        max_tokens: 400,
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userPrompt },
-        ],
-      }),
-      signal: controller.signal,
-    });
+  for (const model of modelsToTry) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
-    if (!response.ok) {
-      console.warn(`groqExplanationService: Groq API returned ${response.status}`);
-      return null;
+    try {
+      const response = await fetch(GROQ_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          model,
+          temperature: 0.3,
+          max_tokens: 350,
+          messages: [
+            { role: "system", content: systemPrompt },
+            { role: "user", content: userPrompt },
+          ],
+        }),
+        signal: controller.signal,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const text = data?.choices?.[0]?.message?.content?.trim();
+        if (text) return text;
+      } else {
+        console.warn(`groqExplanationService: Groq API with model ${model} returned ${response.status}`);
+      }
+    } catch (err) {
+      console.warn(`groqExplanationService: request for model ${model} failed (${err.message})`);
+    } finally {
+      clearTimeout(timeout);
     }
-
-    const data = await response.json();
-    const text = data?.choices?.[0]?.message?.content?.trim();
-    return text || null;
-  } catch (err) {
-    console.warn(`groqExplanationService: request failed (${err.message})`);
-    return null;
-  } finally {
-    clearTimeout(timeout);
   }
+
+  return null;
 }
 
-// Master prompt: shared medical/task framing injected into every request,
-// regardless of audience. Establishes what the numbers ARE before either
-// audience-specific prompt below tells the model how to phrase them.
+// Master prompt: shared medical/task framing injected into every request
 const MASTER_PROMPT = `You are a medical explanation assistant embedded in X-REACH, a clinical decision-support tool that FORECASTS a person's risk of heart disease. The forecast comes from a trained reinforcement-learning model; the input you are given is a LOCAL LIME feature-attribution explanation of that one forecast -- i.e. which of the patient's measurements pushed this specific risk estimate up or down, and by how much.
 
 Your job is to turn that LIME attribution into a short natural-language explanation of WHY the model forecast this risk level for this person. Stay strictly within that scope: explain the forecast and its contributing factors. Do not invent facts not present in the data given to you, do not diagnose, do not recommend treatment, and do not speculate beyond what the contributing factors show.
@@ -120,15 +123,85 @@ You are writing the DOCTOR-facing version of this explanation, for a physician r
 - 2-4 concise sentences, written as a clinical summary, not prose for a layperson.
 - Do not add a patient-facing disclaimer -- this text is for clinical review, not a diagnosis statement.`;
 
+/** Fallback natural-language patient explanation generator */
+function generateFallbackPatientExplanation(context) {
+  const increasing = (context.factors || []).filter((f) => f.contribution > 0);
+  const decreasing = (context.factors || []).filter((f) => f.contribution < 0);
+
+  const riskTerm = (context.riskLevel || "").toLowerCase().includes("high")
+    ? "high"
+    : (context.riskLevel || "").toLowerCase().includes("medium")
+    ? "moderate"
+    : "low";
+
+  const incLabels = increasing.map((f) => f.label.toLowerCase());
+  const decLabels = decreasing.map((f) => f.label.toLowerCase());
+
+  const sentences = [];
+  if (increasing.length > 0) {
+    sentences.push(
+      `Your ${incLabels[0]} is a major factor contributing to your ${riskTerm} heart disease risk estimate.`
+    );
+    if (incLabels.length > 1) {
+      sentences.push(
+        `Having ${incLabels.slice(1).join(" and ")} also push the risk upward.`
+      );
+    }
+  }
+
+  if (decreasing.length > 0) {
+    const decList = decLabels.join(" and ");
+    if (increasing.length > 0) {
+      sentences.push(
+        `Being favorable in ${decList} slightly lowers the risk, but overall the other factors keep the estimate in the ${riskTerm} range.`
+      );
+    } else {
+      sentences.push(
+        `Healthy indicators in ${decList} are positive signs that help keep your overall risk low.`
+      );
+    }
+  }
+
+  return sentences.join(" ");
+}
+
+/** Fallback natural-language doctor explanation generator */
+function generateFallbackDoctorExplanation(context) {
+  const increasing = (context.factors || []).filter((f) => f.contribution > 0);
+  const decreasing = (context.factors || []).filter((f) => f.contribution < 0);
+  const conf = Math.round((context.confidenceScore || 0) * 100);
+
+  const incParts = increasing.map(
+    (f) => `${f.factor} (value: ${context.features?.[f.factor] ?? "N/A"}; LIME weight +${f.contribution.toFixed(3)})`
+  );
+  const decParts = decreasing.map(
+    (f) => `${f.factor} (value: ${context.features?.[f.factor] ?? "N/A"}; LIME weight ${f.contribution.toFixed(3)})`
+  );
+
+  let text = `The model predicts a ${context.riskLevel} heart disease estimate (${conf}% confidence).`;
+  if (incParts.length > 0) {
+    text += ` Primary adverse contributors are ${incParts.slice(0, 2).join(" and ")}.`;
+    if (incParts.length > 2) {
+      text += ` Additional risk is contributed by ${incParts.slice(2).join(", ")}.`;
+    }
+  }
+  if (decParts.length > 0) {
+    text += ` Counterbalancing influences are ${decParts.join(", ")}, which together are evaluated against the adverse factors.`;
+  }
+  return text;
+}
+
 /** @param {ReturnType<typeof buildUserPrompt> | Parameters<typeof buildUserPrompt>[0]} context */
 async function generatePatientExplanation(context) {
-  if (context.factors.length === 0) return null;
-  return callGroq(PATIENT_SYSTEM_PROMPT, buildUserPrompt(context));
+  if (!context || !context.factors || context.factors.length === 0) return null;
+  const llmResult = await callGroq(PATIENT_SYSTEM_PROMPT, buildUserPrompt(context));
+  return llmResult || generateFallbackPatientExplanation(context);
 }
 
 async function generateDoctorExplanation(context) {
-  if (context.factors.length === 0) return null;
-  return callGroq(DOCTOR_SYSTEM_PROMPT, buildUserPrompt(context));
+  if (!context || !context.factors || context.factors.length === 0) return null;
+  const llmResult = await callGroq(DOCTOR_SYSTEM_PROMPT, buildUserPrompt(context));
+  return llmResult || generateFallbackDoctorExplanation(context);
 }
 
 module.exports = { generatePatientExplanation, generateDoctorExplanation };

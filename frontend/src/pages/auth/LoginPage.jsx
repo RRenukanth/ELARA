@@ -40,12 +40,19 @@ export default function LoginPage() {
     try {
       const response = await LOGIN_FN[role]({ username: username.trim(), password });
       login(response.token);
-      navigate(ROLE_HOME[role], { replace: true });
+      navigate(ROLE_HOME[response.role || role], { replace: true });
     } catch (err) {
       setError(err.message);
     } finally {
       setIsSubmitting(false);
     }
+  }
+
+  function fillDemoCredentials(demoRole, demoUsername, demoPassword) {
+    setRole(demoRole);
+    setUsername(demoUsername);
+    setPassword(demoPassword);
+    setError("");
   }
 
   return (
@@ -108,7 +115,35 @@ export default function LoginPage() {
         </button>
       </form>
 
-      <div className="mt-6 text-center text-sm text-neon-300">
+      {/* Quick Demo Credentials */}
+      <div className="mt-5 rounded-xl border border-neon-700/50 bg-black/30 p-3 text-xs">
+        <p className="mb-2 font-semibold text-neon-300">Quick Demo Accounts (Click to Fill):</p>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => fillDemoCredentials("admin", "admin", "adminpassword123")}
+            className="rounded-lg bg-neon-900/60 px-2.5 py-1.5 text-neon-200 hover:bg-neon-800 transition border border-neon-600/40"
+          >
+            Admin (<span className="text-neon-400">admin</span>)
+          </button>
+          <button
+            type="button"
+            onClick={() => fillDemoCredentials("patient", "testpatient", "patientpassword123")}
+            className="rounded-lg bg-neon-900/60 px-2.5 py-1.5 text-neon-200 hover:bg-neon-800 transition border border-neon-600/40"
+          >
+            Patient (<span className="text-neon-400">testpatient</span>)
+          </button>
+          <button
+            type="button"
+            onClick={() => fillDemoCredentials("doctor", "drsmith", "doctorpassword123")}
+            className="rounded-lg bg-neon-900/60 px-2.5 py-1.5 text-neon-200 hover:bg-neon-800 transition border border-neon-600/40"
+          >
+            Doctor (<span className="text-neon-400">drsmith</span>)
+          </button>
+        </div>
+      </div>
+
+      <div className="mt-5 text-center text-sm text-neon-300">
         <p>Don&apos;t have an account?</p>
         <div className="mt-2 flex justify-center gap-4">
           <Link to="/register" className="font-semibold text-neon-300 hover:text-neon-100">

@@ -128,10 +128,27 @@ function login(role) {
       throw new HttpError(400, "Username and password are required.");
     }
 
+    let actualRole = role;
     let account;
     if (role === "patient") account = patientModel.findByUsername(username);
     else if (role === "doctor") account = doctorModel.findByUsername(username);
     else if (role === "admin") account = adminModel.findByUsername(username);
+
+    // If not found in requested role, search other roles to handle mismatched tab selections
+    if (!account) {
+      if (role !== "admin") {
+        const a = adminModel.findByUsername(username);
+        if (a) { account = a; actualRole = "admin"; }
+      }
+      if (!account && role !== "doctor") {
+        const d = doctorModel.findByUsername(username);
+        if (d) { account = d; actualRole = "doctor"; }
+      }
+      if (!account && role !== "patient") {
+        const p = patientModel.findByUsername(username);
+        if (p) { account = p; actualRole = "patient"; }
+      }
+    }
 
     if (!account) {
       throw new HttpError(401, "Invalid username or password.");
@@ -142,25 +159,25 @@ function login(role) {
       throw new HttpError(401, "Invalid username or password.");
     }
 
-    if (role === "doctor" && account.approval_status !== "approved") {
+    if (actualRole === "doctor" && account.approval_status !== "approved") {
       throw new HttpError(403, "Your account is pending administrator approval.");
     }
 
-    if (role === "patient" && account.status !== "Active") {
+    if (actualRole === "patient" && account.status !== "Active") {
       throw new HttpError(403, "Your account is inactive. Please contact support.");
     }
 
-    const idField = role === "patient" ? "patient_id" : role === "doctor" ? "doctor_id" : "admin_id";
-    const token = signToken({ id: account[idField], role, username: account.username });
+    const idField = actualRole === "patient" ? "patient_id" : actualRole === "doctor" ? "doctor_id" : "admin_id";
+    const token = signToken({ id: account[idField], role: actualRole, username: account.username });
 
     const profile =
-      role === "patient"
+      actualRole === "patient"
         ? patientModel.toPublicProfile(account)
-        : role === "doctor"
+        : actualRole === "doctor"
         ? doctorModel.toPublicProfile(account)
         : { adminId: account.admin_id, username: account.username };
 
-    return res.status(200).json({ message: "Login successful.", token, role, profile });
+    return res.status(200).json({ message: "Login successful.", token, role: actualRole, profile });
   };
 }
 
