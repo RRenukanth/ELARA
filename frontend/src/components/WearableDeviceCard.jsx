@@ -192,7 +192,7 @@ export default function WearableDeviceCard({ onThalachUpdate, thalachReady, onTh
               </span>
             </div>
             <p className="text-xs text-neon-300">
-              WiFi: Mobitel_4G_B69AC â€¢ Rolling 8-BPM Average â€¢ Confirmed Thalach Detection
+              WiFi: Mobitel_4G_B69AC &bull; Rolling 8-BPM Average &bull; Confirmed Thalach Detection
             </p>
           </div>
         </div>
@@ -223,10 +223,23 @@ export default function WearableDeviceCard({ onThalachUpdate, thalachReady, onTh
                 <button
                   type="button"
                   onClick={() => setShowWifiInput((prev) => !prev)}
-                  className="rounded-r-xl border border-l-0 border-neon-400/40 bg-neon-700/60 px-2.5 text-xs text-neon-200 hover:bg-neon-600/80 transition"
+                  className="rounded-r-xl border border-l-0 border-neon-400/40 bg-neon-700/60 px-2.5 text-xs text-neon-200 hover:bg-neon-600/80 transition flex items-center justify-center"
                   title="Configure ESP32 IP or Hostname"
                 >
-                  âš™ï¸
+                  <svg className="h-4 w-4 text-neon-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
                 </button>
               </div>
 
@@ -339,11 +352,13 @@ export default function WearableDeviceCard({ onThalachUpdate, thalachReady, onTh
               Average Heart Rate
             </span>
             <span
-              className={`text-xl transition-transform duration-200 ${
-                isConnected && avgBpm > 0 ? "animate-heartbeat text-crimson-400" : "text-neon-500"
+              className={`inline-flex items-center justify-center transition-all duration-200 ${
+                isConnected && avgBpm > 0 ? "animate-heartbeat text-crimson-400 drop-shadow-[0_0_8px_rgba(255,59,92,0.6)]" : "text-neon-600"
               }`}
             >
-              â¤ï¸
+              <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
             </span>
           </div>
 
@@ -375,7 +390,7 @@ export default function WearableDeviceCard({ onThalachUpdate, thalachReady, onTh
         <div className="relative overflow-hidden rounded-2xl border border-neon-500/40 bg-gradient-to-br from-neon-900/80 to-neon-950/90 p-4 shadow-[0_4px_20px_rgba(47,123,255,0.15)]">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-neon-200">
-              Thalach (Max HR)
+              Max Heart Rate (Thalach)
             </span>
             <span className="rounded-md bg-neon-500/20 px-2 py-0.5 text-[10px] font-bold text-neon-300">
               AI Feature

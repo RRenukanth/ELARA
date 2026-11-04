@@ -281,10 +281,23 @@ export default function EcgDeviceCard({ onEcgUpdate }) {
                 <button
                   type="button"
                   onClick={() => setShowWifiInput((prev) => !prev)}
-                  className="rounded-r-xl border border-l-0 border-emerald-400/40 bg-emerald-900/60 px-2.5 text-xs text-emerald-200 hover:bg-emerald-800/80 transition"
+                  className="rounded-r-xl border border-l-0 border-emerald-400/40 bg-emerald-900/60 px-2.5 text-xs text-emerald-200 hover:bg-emerald-800/80 transition flex items-center justify-center"
                   title="Configure ESP32 ECG IP or Hostname"
                 >
-                  ⚙️
+                  <svg className="h-4 w-4 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
                 </button>
               </div>
 
@@ -369,7 +382,7 @@ export default function EcgDeviceCard({ onEcgUpdate }) {
       )}
 
       {/* Live ECG Metrics Grid: RestECG, Oldpeak, Slope & HeartRate */}
-      <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {/* Metric 1: RESTING ECG (restecg) */}
         <div className="relative overflow-hidden rounded-2xl border border-emerald-400/30 bg-gradient-to-br from-neon-900/80 to-neon-950/90 p-4 shadow-[0_4px_20px_rgba(16,185,129,0.12)]">
           <div className="flex items-center justify-between">
@@ -445,26 +458,6 @@ export default function EcgDeviceCard({ onEcgUpdate }) {
           </div>
           <p className="mt-2 text-[11px] text-neon-400">
             Maps to Form: 0: Downsloping • 1: Flat • 2: Upsloping
-          </p>
-        </div>
-
-        {/* Metric 4: ECG HEART RATE */}
-        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-neon-900/60 to-neon-950/80 p-4">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-neon-300">
-              ECG Heart Rate
-            </span>
-            <span className="text-lg">🫀</span>
-          </div>
-
-          <div className="mt-2.5 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold tracking-tight text-white">
-              {isConnected && !leadsOff && heartRate > 0 ? Math.round(heartRate) : "--"}
-            </span>
-            <span className="text-sm font-semibold text-emerald-400">BPM</span>
-          </div>
-          <p className="mt-2 text-[11px] text-neon-400">
-            Signal Quality: {isConnected && !leadsOff ? `${Math.round(signalQuality * 100)}%` : "--"}
           </p>
         </div>
       </div>
