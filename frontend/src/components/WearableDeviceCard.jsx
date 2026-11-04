@@ -352,11 +352,13 @@ export default function WearableDeviceCard({ onThalachUpdate, thalachReady, onTh
               Average Heart Rate
             </span>
             <span
-              className={`text-xl transition-transform duration-200 ${
-                isConnected && avgBpm > 0 ? "animate-heartbeat text-crimson-400" : "text-neon-500"
+              className={`inline-flex items-center justify-center transition-all duration-200 ${
+                isConnected && avgBpm > 0 ? "animate-heartbeat text-crimson-400 drop-shadow-[0_0_8px_rgba(255,59,92,0.6)]" : "text-neon-600"
               }`}
             >
-              ❤️
+              <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
             </span>
           </div>
 
@@ -388,7 +390,7 @@ export default function WearableDeviceCard({ onThalachUpdate, thalachReady, onTh
         <div className="relative overflow-hidden rounded-2xl border border-neon-500/40 bg-gradient-to-br from-neon-900/80 to-neon-950/90 p-4 shadow-[0_4px_20px_rgba(47,123,255,0.15)]">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-neon-200">
-              Thalach (Max HR)
+              Max Heart Rate (Thalach)
             </span>
             <span className="rounded-md bg-neon-500/20 px-2 py-0.5 text-[10px] font-bold text-neon-300">
               AI Feature
