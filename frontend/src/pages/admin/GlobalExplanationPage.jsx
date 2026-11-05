@@ -70,32 +70,17 @@ export default function GlobalExplanationPage() {
           {explanation.explainabilityMetrics && (
             <section>
               <h2 className="mb-3 text-lg font-bold text-neon-50">Explainability Quality Metrics</h2>
-              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-3">
                 <StatCard label="Fidelity" value={formatMetric(explanation.explainabilityMetrics.fidelity)} />
                 <StatCard label="Accuracy Gain" value={formatMetric(explanation.explainabilityMetrics.accuracyGain)} />
                 <StatCard label="Agreement" value={formatMetric(explanation.explainabilityMetrics.agreement)} />
                 <StatCard label="Stability" value={formatMetric(explanation.explainabilityMetrics.stability)} />
                 <StatCard label="Sparsity" value={formatMetric(explanation.explainabilityMetrics.sparsity)} />
                 <StatCard
-                  label="Deletion AUC"
-                  value={formatMetric(explanation.explainabilityMetrics.deletionAuc)}
-                />
-                <StatCard
-                  label="Insertion AUC"
-                  value={formatMetric(explanation.explainabilityMetrics.insertionAuc)}
-                />
-                <StatCard
                   label="Reward Improvement"
                   value={formatMetric(explanation.explainabilityMetrics.rewardImprovement)}
                 />
               </div>
-              <p className="mt-3 text-xs text-neon-500">
-                Deletion AUC (lower is better) and Insertion AUC (higher is better) test whether the
-                feature-importance ranking matches what the real model actually relies on, by
-                progressively removing/restoring features from the real model's input and tracking its
-                own confidence -- unlike the other metrics, which evaluate the surrogate rather than the
-                real model directly.
-              </p>
             </section>
           )}
 
